@@ -4,3 +4,4 @@ storybook-static/
 .npm-cache/
 dist/
 .DS_Store
+build-storybook.log
