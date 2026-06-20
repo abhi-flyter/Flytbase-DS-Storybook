@@ -1,0 +1,40 @@
+{
+  "source": {
+    "fileKey": "WRXdNp9M1SEjWPaUhU67pg",
+    "fileName": "F Design System 2.0 Copy",
+    "exportedAt": "2026-06-20",
+    "source": "Figma Plugin API"
+  },
+  "collections": {
+    "Primitives": {
+      "count": 139,
+      "output": "tokens/primitive.css"
+    },
+    "Color": {
+      "count": 120,
+      "output": "tokens/semantic-light.css"
+    },
+    "Spacing": {
+      "count": 39,
+      "output": "tokens/semantic-light.css"
+    },
+    "Typography": {
+      "count": 16,
+      "output": "tokens/semantic-light.css"
+    }
+  },
+  "cssVariableCounts": {
+    "primitive": 139,
+    "semanticLight": 295
+  },
+  "storybookImports": [
+    "tokens/primitive.css",
+    "tokens/semantic-light.css",
+    "tokens/semantic-dark.css"
+  ],
+  "notes": [
+    "Color semantic variables preserve Figma alias relationships with CSS var() references to primitive variables.",
+    "Spacing values are emitted as rem units for ordinary size tokens and px for full-radius tokens.",
+    "No dark-mode variable mode exists in the source file yet; semantic-dark.css is intentionally a placeholder."
+  ]
+}

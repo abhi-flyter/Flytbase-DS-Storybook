@@ -1,0 +1,136 @@
+import { existsSync, readFileSync } from 'node:fs';
+import path from 'node:path';
+
+const expectedMcpName = 'fb-design-system-sb-mcp';
+const requiredComponents = [
+  'Badge',
+  'Banner',
+  'Button',
+  'ButtonGroup',
+  'Checkbox',
+  'Chip',
+  'CircularBadge',
+  'DatePicker',
+  'Divider',
+  'FilterSortButton',
+  'FilterWidget',
+  'IconButton',
+  'InputField',
+  'List',
+  'Loader',
+  'Menu',
+  'Modal',
+  'ProgressIndicator',
+  'RadioButton',
+  'Search',
+  'SegmentedButton',
+  'Slider',
+  'Snackbar',
+  'SortWidget',
+  'Table',
+  'Tabs',
+  'TextField',
+  'Toast',
+  'ToggleButton',
+  'ToggleSwitch',
+  'Tooltip'
+];
+
+function readRequired(filePath) {
+  if (!existsSync(filePath)) {
+    throw new Error(`Missing required file: ${filePath}`);
+  }
+  return readFileSync(filePath, 'utf8');
+}
+
+function assertIncludes(source, needle, label) {
+  if (!source.includes(needle)) {
+    throw new Error(`${label} is missing required text: ${needle}`);
+  }
+}
+
+const packageJson = JSON.parse(readRequired('package.json'));
+const storybookMain = readRequired(path.join('.storybook', 'main.ts'));
+const agents = readRequired('AGENTS.md');
+const claude = readRequired('CLAUDE.md');
+const readiness = readRequired(path.join('docs', 'phase-5', 'storybook-mcp-readiness.md'));
+const vitestConfig = readRequired('vitest.config.ts');
+const mcpConfig = JSON.parse(readRequired('.mcp.json'));
+const manifestPath = path.join('storybook-static', 'manifests', 'components.json');
+const manifest = JSON.parse(readRequired(manifestPath));
+const components = manifest.components ?? {};
+
+if (!packageJson.devDependencies?.['@storybook/addon-mcp']) {
+  throw new Error('Missing @storybook/addon-mcp devDependency.');
+}
+if (!packageJson.devDependencies?.['@storybook/addon-vitest']) {
+  throw new Error('Missing @storybook/addon-vitest devDependency.');
+}
+if (!packageJson.devDependencies?.vitest) {
+  throw new Error('Missing vitest devDependency.');
+}
+if (!packageJson.devDependencies?.playwright) {
+  throw new Error('Missing playwright devDependency.');
+}
+if (packageJson.scripts?.['test-storybook'] !== 'vitest --project=storybook') {
+  throw new Error('Missing package script: "test-storybook": "vitest --project=storybook".');
+}
+
+assertIncludes(storybookMain, "'@storybook/addon-mcp'", 'Storybook config');
+assertIncludes(storybookMain, "'@storybook/addon-vitest'", 'Storybook config');
+assertIncludes(storybookMain, 'experimentalComponentsManifest: true', 'Storybook config');
+assertIncludes(storybookMain, 'experimentalCodeExamples: true', 'Storybook config');
+assertIncludes(vitestConfig, 'storybookTest', 'Vitest config');
+assertIncludes(vitestConfig, "configDir: path.join(dirname, '.storybook')", 'Vitest config');
+assertIncludes(vitestConfig, "name: 'storybook'", 'Vitest config');
+assertIncludes(vitestConfig, 'provider: playwright({})', 'Vitest config');
+
+const mcpServer = mcpConfig.mcpServers?.[expectedMcpName];
+if (!mcpServer) {
+  throw new Error(`.mcp.json is missing mcpServers.${expectedMcpName}.`);
+}
+if (mcpServer.type !== 'http' || mcpServer.url !== 'http://localhost:6006/mcp') {
+  throw new Error(`.mcp.json server ${expectedMcpName} must use http://localhost:6006/mcp.`);
+}
+
+for (const [label, source] of [
+  ['AGENTS.md', agents],
+  ['CLAUDE.md', claude],
+  ['Phase 5 readiness doc', readiness]
+]) {
+  assertIncludes(source, expectedMcpName, label);
+  assertIncludes(source, 'list-all-documentation', label);
+  assertIncludes(source, 'get-documentation', label);
+  assertIncludes(source, 'get-documentation-for-story', label);
+  assertIncludes(source, 'get-storybook-story-instructions', label);
+  assertIncludes(source, 'run-story-tests', label);
+  assertIncludes(source, 'Never hallucinate component properties', label);
+}
+
+const missingComponents = requiredComponents
+  .map((name) => `components-${name.toLowerCase()}`)
+  .filter((id) => !components[id]);
+
+const componentsWithoutDocs = requiredComponents
+  .map((name) => ({ name, id: `components-${name.toLowerCase()}` }))
+  .filter(({ id }) => !components[id]?.reactDocgen?.description?.trim())
+  .map(({ name }) => name);
+
+const report = {
+  mcpServerName: expectedMcpName,
+  addonConfigured: true,
+  manifestComponents: Object.keys(components).length,
+  expectedComponents: requiredComponents.length,
+  missingComponents,
+  componentsWithoutDocs,
+  agentInstructionFiles: ['AGENTS.md', 'CLAUDE.md'],
+  mcpConfig: '.mcp.json',
+  readinessDoc: 'docs/phase-5/storybook-mcp-readiness.md',
+  storybookTestScript: packageJson.scripts['test-storybook']
+};
+
+console.log(JSON.stringify(report, null, 2));
+
+if (missingComponents.length > 0 || componentsWithoutDocs.length > 0) {
+  process.exit(1);
+}

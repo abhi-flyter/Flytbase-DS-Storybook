@@ -1,0 +1,66 @@
+export const componentDocs = {
+  Badge:
+    'Badges convey dynamic information, such as a count or status. Figma coverage includes success, error, caution, warning, info, secondary, disabled, and optional 16px Icon/Play prefix variants.',
+  Banner:
+    'Use banners for contextual system feedback that must stay visible in the surrounding workflow. Figma guidance says banners always push the content below and are not overlays. Coverage includes title/no-title variants, info/caution/warning/error tones, 24px tone icons, two CTA slots, and a close icon button.',
+  Button:
+    'Use Button for product actions with clear hierarchy. Figma coverage includes primary, secondary, tertiary outline, tonal, text/link, small/default/large sizes, idle, hover, pressed, focused, disabled, and loader states. Disabled buttons use the no-action cursor.',
+  ButtonGroup:
+    'Use ButtonGroup to cluster related actions while preserving the Figma padding axis: tight, default, and loose. Figma also groups SegmentedButton and ToggleButton on this page with 2, 3, 4, and 5 segment layouts.',
+  Checkbox:
+    'Use Checkbox for independent choices and parent-child indeterminate selection. If some, but not all, child checkboxes are checked, the parent checkbox goes to the indeterminate state. Figma coverage includes unselected, selected, indeterminate, 16px/20px bounds, and default, hover, pressed, focused, and disabled states.',
+  Chip:
+    'Chips help people enter information, make selections, filter content, or trigger actions. Figma coverage includes input chips, choice chips, and filter chips with size, selected, selection-type, prefix/avatar/icon, close, dropdown, and state axes.',
+  CircularBadge:
+    'Use CircularBadge for compact notification and unread indicators. Figma coverage includes a 6px dot and a short value badge.',
+  DatePicker:
+    'Date pickers allow users to select dates and time for inputs or filters. Figma coverage includes single date picker, range date picker, Sunday-start day-of-week grid, 36px by 30px day cells, month/year selection, Clear and Clear all actions, Start and End fields, help text, and optional time selection rows.',
+  Divider:
+    'A divider is a thin line used to group content in lists and layouts. Figma coverage includes horizontal and vertical full-width and middle-inset variants, with 320px by 1px horizontal examples and 1px by 120px vertical examples.',
+  FilterSortButton:
+    'Use FilterSortButton to open filtering or sorting widgets and communicate selected or active filter/sort state. Figma guidance says the number of active filter categories must be visible in the button, such as `2` when site and device filters are applied. Coverage includes idle, hover, pressed, focused, selected yes/no, activeFilter/Sort yes/no, 32px height, 16px icon, and active count badge.',
+  FilterWidget:
+    'Filter/Sort widgets allow users to filter, search specifics, and select all or clear all line items. Figma coverage includes Filter widget states Default, 1/few selected, and all selected, a 248px panel, search header, checkbox menu rows, Select all footer, Clear all behavior, and Sort widget/table states Default, Newest, and Oldest.',
+  IconButton:
+    'Use IconButton for compact tool actions where the icon carries the meaning. Figma specifies that icon buttons always have tooltips; when focused, pressing Enter executes the action. Coverage includes default, filled, outline, small/default sizes, idle, hover, pressed, focused, and disabled states.',
+  InputField:
+    'Use InputField for dropdown and autocomplete selection. Figma coverage includes autocomplete and dropdown modes, single/multiple input, active yes/no, default, hover, pressed, focused, open, and disabled states, 342px field width, header actions, help text, and open dropdown menus.',
+  List:
+    'Lists are continuous, vertical indexes of text or images. Figma coverage includes default and small sizes, collapsed and expanded rows, drag and expand affordances, default, hover, pressed, focused, and disabled states, and the guidance that rows with expand/collapse controls should make the whole row clickable.',
+  Loader:
+    'Loaders represent in-progress states for different components. Figma coverage includes search loading, table/list loading, support-panel loading, uploading table examples, and compact control loader states.',
+  Menu:
+    'Menus display a list of choices on a temporary surface after users interact with a button, action, or other control. Figma coverage includes dropdown and menu types, action/divider/sub-title content rows, single and multiple selection, default, hover, pressed, focused, disabled, selected, destructive, prefix icon/slot, suffix selection/shortcut-key, CTA footer, and select-all footer variants.',
+  Modal:
+    'Modals and dialogs provide important prompts in a user flow. Figma coverage includes small 380px, medium 480px, and large 620px sizes, 48px title bar, 36px body, 56px footer, close IconButton, tertiary CTA plus footer actions, scroll after max height, and the rule that the modal does not close when users click outside.',
+  ProgressIndicator:
+    'Use ProgressIndicator to indicate progress of a task. Figma coverage includes linear bar progress at 5%, 50%, and 100%, circular progress at 5%, 50%, 75%, and 100%, percentage labels that keep updating with progress, 401px by 20px linear examples, and 32px circular examples.',
+  RadioButton:
+    'Use RadioButton for mutually exclusive choices. Figma guidance says the first option in a radio-button list is always selected by default. Coverage includes selected/unselected, 16px/20px bounds, and default, hover, pressed, focused, and disabled states.',
+  Search:
+    'Use Search for finding or filtering content in the current surface. Figma guidance says search results update in real time as soon as the user types, result counts should always be shown, suggestions/autofill should improve the experience, Enter or Esc returns the field to rest state, and the input should auto-scroll to keep the cursor in view. Coverage includes small 28px and medium 32px sizes, search and close icons, and default, hover, pressed, focused, and active states.',
+  SegmentedButton:
+    'Use SegmentedButton for mutually exclusive view or mode switching. Figma coverage includes 2, 3, 4, and 5 segment layouts with selected and stateful segment parts.',
+  Slider:
+    'Use Slider to set the start and end of a range by supplying an array of values, or a single bounded value with one handle. Figma coverage includes one-slider and two-slider modes, active and disabled types, label, live top-right output, suffix unit, help text, 240px track width, and guidance that slider values reflect in real time.',
+  Snackbar:
+    'Use Snackbar for non-critical CRUD or info messages such as Mission saved, Zones updated, or Tag created. Figma guidance says snackbars stay visible for 10 seconds unless the close icon is clicked, persist while hovered, get replaced by simultaneous snackbars, and include shadow/elevation, type icons, optional action button, and close icon.',
+  SortWidget:
+    'Use SortWidget for selecting sort order. Figma coverage includes default and custom sort widget types, Reset to default actions, Created on, Updated on, Device, Newest, and Oldest rows, plus table sort states Default, Newest, and Oldest.',
+  Table:
+    'Use Table for scan-heavy operational data with comparable rows and status-rich columns. Figma coverage includes a toolbar with Search, Sort, Filters, secondary and primary actions, checkbox selection column, Name, Date, Time, Validity, Drone, Quantity, Files, Extra, and Actions columns, uploading file cells, table sort affordances, and footer pagination such as Devices: 6/20, 1-5 of 100, and Lines per page.',
+  Tabs:
+    'Tabs organize and support navigation between groups of related content at the same level of hierarchy. Figma coverage includes 2, 3, 4, and 5 tab layouts, selected tab positions, 20px icon building blocks, divider, and the guidance that disabled tabs are not clickable.',
+  TextField:
+    'Text fields allow users to enter text into a UI and typically appear in forms and dialogs. Figma coverage includes outline text fields, number text fields, header default/mandatory/optional variants, prefix asset/icon, suffix counter/icon, phone prefix, helper text, error/caution text, description box, and default, hover, pressed, focused, active, disabled, error, and description states.',
+  Toast:
+    'Use Toast for important or critical information that is not related to flight safety and should be logged into the notification system. Figma guidance says toasts include success, error, caution, and info notification types, timestamp, source, title, description, dismiss action, and stay persistent while hovered.',
+  ToggleButton:
+    'Use ToggleButton for compact independent mode toggles. Figma coverage includes 2, 3, 4, and 5 segment layouts with selected and interaction states.',
+  ToggleSwitch:
+    'Use ToggleSwitch for immediate on/off settings. Figma coverage includes selected yes/no plus default, hover, pressed, focused, disabled, and loader states at a 36px by 20px switch size.',
+  Tooltip:
+    'Tooltips display brief labels or messages on hover and focus, including keyboard navigation. Figma coverage includes plain and rich tooltips, heading/body/action content, 12px by 7px arrows, and top/top-start/top-end/bottom/bottom-start/bottom-end/left-top/left-bottom/right-top/right-bottom placements.'
+} as const;
+
+export type DocumentedComponentName = keyof typeof componentDocs;

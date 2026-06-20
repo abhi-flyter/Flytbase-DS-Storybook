@@ -1,0 +1,41 @@
+{
+  "name": "fb-design-system-storybook",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite --host 0.0.0.0",
+    "storybook": "storybook dev --port 6006 --host 0.0.0.0",
+    "build-storybook": "storybook build",
+    "typecheck": "tsc --noEmit",
+    "audit:phase4": "node scripts/audit-phase-4.mjs",
+    "verify:storybook-static": "node scripts/verify-storybook-static.mjs",
+    "verify:phase4": "node scripts/verify-phase-4.mjs",
+    "verify:phase5": "node scripts/verify-phase-5.mjs",
+    "verify:phase5:live": "node scripts/verify-phase-5-live.mjs",
+    "test-storybook": "vitest --project=storybook"
+  },
+  "dependencies": {
+    "lucide-react": "^0.468.0",
+    "react": "18.3.1",
+    "react-dom": "18.3.1"
+  },
+  "devDependencies": {
+    "@storybook/addon-docs": "^10.4.6",
+    "@storybook/addon-mcp": "^0.6.0",
+    "@storybook/addon-vitest": "^10.4.6",
+    "@storybook/react": "10.4.6",
+    "@storybook/react-vite": "10.4.6",
+    "@types/react": "18.3.18",
+    "@types/react-dom": "18.3.5",
+    "@vitejs/plugin-react": "4.3.4",
+    "@vitest/browser-playwright": "^4.1.9",
+    "@vitest/coverage-v8": "^4.1.9",
+    "chromatic": "^17.5.0",
+    "playwright": "^1.61.0",
+    "storybook": "10.4.6",
+    "typescript": "5.7.3",
+    "vite": "^6.4.3",
+    "vitest": "^4.1.9"
+  }
+}
