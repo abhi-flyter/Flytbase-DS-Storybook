@@ -42,7 +42,7 @@ export function TextField({
   visualState = 'default',
   ...props
 }: TextFieldProps) {
-  const { defaultValue, onChange, placeholder, value, ...fieldProps } = props;
+  const { defaultValue, inputMode, onChange, placeholder, value, ...fieldProps } = props;
   const helperId = helperText ? `${slug(label)}-helper` : undefined;
   const isDisabled = disabled || visualState === 'disabled';
   const isError = visualState === 'error';
@@ -75,7 +75,8 @@ export function TextField({
             aria-describedby={helperId}
             aria-invalid={isError || undefined}
             disabled={isDisabled}
-            type={numberControls ? 'number' : 'text'}
+            inputMode={numberControls ? 'numeric' : inputMode}
+            type="text"
             defaultValue={defaultValue}
             onChange={onChange as ChangeEventHandler<HTMLInputElement> | undefined}
             placeholder={placeholder}

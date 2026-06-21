@@ -597,17 +597,18 @@
   position: relative;
 }
 
-.fds-input-field select {
+.fds-input-field-trigger {
+  background: transparent;
+  border: 0;
   cursor: pointer;
-  height: 100%;
   inset: 0;
-  opacity: 0;
+  padding: 0;
   position: absolute;
   width: 100%;
 }
 
-.fds-input-field select[multiple] {
-  height: 100%;
+.fds-input-field-trigger:disabled {
+  cursor: not-allowed;
 }
 
 .fds-input-field-value {
@@ -653,11 +654,22 @@
   z-index: 2;
 }
 
-.fds-input-menu span {
+.fds-input-option {
+  align-items: center;
+  background: transparent;
+  border: 0;
+  color: var(--color-fds-text-icon-01);
+  cursor: pointer;
+  display: flex;
+  font: inherit;
+  justify-content: space-between;
   padding: var(--spacing-fds-size-200);
+  text-align: left;
+  width: 100%;
 }
 
-.fds-input-menu span:hover {
+.fds-input-option:hover,
+.fds-input-option[aria-selected="true"] {
   background: var(--color-fds-surface-states-hover);
 }
 
@@ -1297,12 +1309,57 @@ button.fds-list-row {
 .fds-slider-track {
   align-items: center;
   display: grid;
-  min-height: 8px;
+  min-height: 20px;
+  position: relative;
 }
 
-.fds-slider input {
-  accent-color: var(--color-fds-primary-200-p);
+.fds-slider-rail {
+  background: var(--color-fds-outline-o-secondary);
+  border-radius: var(--spacing-fds-full);
+  display: block;
+  height: 4px;
+  position: relative;
   width: 100%;
+}
+
+.fds-slider-fill {
+  background: var(--color-fds-primary-200-p);
+  border-radius: var(--spacing-fds-full);
+  height: 100%;
+  position: absolute;
+}
+
+.fds-slider-thumb {
+  background: var(--color-fds-background-level-1);
+  border: 2px solid var(--color-fds-primary-200-p);
+  border-radius: var(--spacing-fds-full);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.28);
+  height: 16px;
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 16px;
+}
+
+.fds-slider-handle {
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+  grid-area: 1 / 1;
+  height: 20px;
+  padding: 0;
+  position: relative;
+  transform: translateX(-50%);
+  width: 20px;
+}
+
+.fds-slider-handle:focus-visible {
+  border-radius: var(--spacing-fds-full);
+  box-shadow: 0 0 0 2px var(--color-fds-primary-50);
+}
+
+.fds-slider-handle:disabled {
+  cursor: not-allowed;
 }
 
 .fds-slider[data-disabled="yes"] {

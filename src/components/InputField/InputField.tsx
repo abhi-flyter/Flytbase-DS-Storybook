@@ -1,4 +1,4 @@
-import type { SelectHTMLAttributes } from 'react';
+import type { ButtonHTMLAttributes, KeyboardEvent } from 'react';
 import '../styles.css';
 import { Icon, icons } from '../icons';
 import { cx, useControllableState } from '../shared';
@@ -10,7 +10,7 @@ export type InputFieldValue = string | string[];
  *
  * Use dropdown mode for constrained choices and autocomplete mode when searching within a large option set.
  */
-export interface InputFieldProps extends Omit<SelectHTMLAttributes<HTMLSelectElement>, 'defaultValue' | 'multiple' | 'onChange' | 'value'> {
+export interface InputFieldProps extends Omit<ButtonHTMLAttributes<HTMLButtonElement>, 'defaultValue' | 'onChange' | 'value'> {
   /** Visible label for the input field. */
   label: string;
   /** Figma component mode: autocomplete or dropdown. */
@@ -54,10 +54,35 @@ export function InputField({
     onChange,
     value
   });
+  const isDisabled = disabled || visualState === 'disabled';
   const isOpen = visualState === 'open';
   const selectedValues = Array.isArray(currentValue) ? currentValue : currentValue ? [currentValue] : [];
   const isActive = active || selectedValues.length > 0;
   const visibleValues = selectedValues.length > 0 ? selectedValues : isActive ? options.slice(0, selection === 'multiple' ? 2 : 1) : [placeholder];
+  const listboxId = `${label.toLowerCase().replace(/[^a-z0-9]+/g, '-')}-options`;
+
+  function selectOption(option: string) {
+    if (isDisabled) return;
+
+    if (selection === 'multiple') {
+      setValue(
+        selectedValues.includes(option)
+          ? selectedValues.filter((selectedValue) => selectedValue !== option)
+          : [...selectedValues, option]
+      );
+      return;
+    }
+
+    setValue(option);
+  }
+
+  function handleKeyDown(event: KeyboardEvent<HTMLButtonElement>) {
+    if (event.key === 'ArrowDown' || event.key === 'Enter' || event.key === ' ') {
+      event.preventDefault();
+      selectOption(options[0]);
+    }
+  }
+
   return (
     <label
       className={cx('fds-input-field', className)}
@@ -71,38 +96,38 @@ export function InputField({
         {mode === 'autocomplete' ? <span aria-hidden="true" className="fds-icon-slot"><Icon icon={icons.search} /></span> : null}
         <span className="fds-input-field-value" aria-hidden="true">
           {visibleValues.map((value) => (
-            <span key={value} data-placeholder={active ? 'no' : 'yes'}>
+            <span key={value} data-placeholder={isActive ? 'no' : 'yes'}>
               {value}
             </span>
           ))}
         </span>
-        <select
+        <button
+          aria-controls={isOpen ? listboxId : undefined}
+          aria-expanded={isOpen}
+          aria-haspopup="listbox"
           aria-label={label}
-          className="fds-input-field-native"
-          disabled={disabled || visualState === 'disabled'}
-          multiple={selection === 'multiple'}
-          onChange={(event) => {
-            const nextValue =
-              selection === 'multiple'
-                ? Array.from(event.currentTarget.selectedOptions, (option) => option.value)
-                : event.currentTarget.value;
-            setValue(nextValue);
-          }}
-          size={selection === 'multiple' ? 2 : undefined}
-          value={currentValue}
+          className="fds-input-field-trigger"
+          disabled={isDisabled}
+          onKeyDown={handleKeyDown}
+          type="button"
           {...props}
-        >
-          {selection === 'single' ? <option value="">{placeholder}</option> : null}
-          {options.map((option) => (
-            <option key={option} value={option}>{option}</option>
-          ))}
-        </select>
+        />
         <span aria-hidden="true" className="fds-icon-slot"><Icon icon={icons.chevronDown} /></span>
       </span>
       {isOpen ? (
-        <span className="fds-input-menu" aria-hidden="true">
+        <span className="fds-input-menu" id={listboxId} role="listbox" aria-multiselectable={selection === 'multiple' || undefined}>
           {options.map((option) => (
-            <span key={option}>{option}</span>
+            <button
+              aria-selected={selectedValues.includes(option)}
+              className="fds-input-option"
+              key={option}
+              onClick={() => selectOption(option)}
+              role="option"
+              type="button"
+            >
+              <span>{option}</span>
+              {selectedValues.includes(option) ? <Icon icon={icons.check} /> : null}
+            </button>
           ))}
         </span>
       ) : null}

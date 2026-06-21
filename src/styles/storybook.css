@@ -70,7 +70,7 @@ select {
   align-items: start;
   display: flex;
   flex-wrap: wrap;
-  gap: var(--spacing-fds-size-200);
+  gap: var(--spacing-fds-size-600);
 }
 
 .foundation-token-grid {
