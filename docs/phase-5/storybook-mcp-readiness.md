@@ -29,7 +29,28 @@ Phase 5 connects the F Design System Storybook to AI agents through Storybook MC
 
 ## Agent Registration
 
-With Storybook running, connect your local agent to the MCP endpoint:
+### Remote Chromatic MCP
+
+Use this when teammates only need shared Storybook documentation and component API context without running Storybook locally:
+
+```bash
+npx mcp-add --type http --url "https://main--6a370c8694b639efab312a0d.chromatic.com/mcp" --client-id "cdf3737dff9d485485968e50b63fd8b4" --scope project
+```
+
+If `mcp-add` opens an interactive prompt:
+
+- Choose the teammate's actual coding agent, such as Claude Code, Cursor, or VS Code.
+- Use `fb-design-system-sb-mcp` as the server name.
+
+Claude Code users can alternatively run:
+
+```bash
+claude mcp add fb-design-system-sb-mcp --transport http https://main--6a370c8694b639efab312a0d.chromatic.com/mcp --scope project
+```
+
+### Local Storybook MCP
+
+Use this when you want the full local development/testing toolset. With Storybook running, connect your local agent to the MCP endpoint:
 
 Agents that support project-level `.mcp.json` can use the checked-in server entry directly:
 

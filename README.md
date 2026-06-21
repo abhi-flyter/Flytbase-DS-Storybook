@@ -37,8 +37,10 @@ fb-design-system-sb-mcp
 For shared docs access without running Storybook locally:
 
 ```bash
-npx mcp-add --type http --url "https://main--6a370c8694b639efab312a0d.chromatic.com/mcp" --scope project
+npx mcp-add --type http --url "https://main--6a370c8694b639efab312a0d.chromatic.com/mcp" --client-id "cdf3737dff9d485485968e50b63fd8b4" --scope project
 ```
+
+If `mcp-add` asks where to install the server, choose your actual coding agent, for example Claude Code, Cursor, or VS Code. Use `fb-design-system-sb-mcp` as the server name.
 
 For local development/testing tools:
 
