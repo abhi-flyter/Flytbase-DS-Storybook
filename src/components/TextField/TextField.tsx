@@ -1,4 +1,4 @@
-import type { InputHTMLAttributes, ReactNode } from 'react';
+import type { ChangeEventHandler, InputHTMLAttributes, ReactNode } from 'react';
 import '../styles.css';
 import { cx, slug, type FieldState } from '../shared';
 
@@ -7,7 +7,7 @@ import { cx, slug, type FieldState } from '../shared';
  *
  * Use for direct text entry, helper text, errors, description boxes, and compact numeric controls.
  */
-export interface TextFieldProps extends Omit<InputHTMLAttributes<HTMLInputElement>, 'prefix' | 'size' | 'type'> {
+export interface TextFieldProps extends Omit<InputHTMLAttributes<HTMLInputElement>, 'onChange' | 'prefix' | 'size' | 'type'> {
   /** Visible field label. */
   label: string;
   /** Text field state from the Figma outline axis. */
@@ -24,6 +24,8 @@ export interface TextFieldProps extends Omit<InputHTMLAttributes<HTMLInputElemen
   multiline?: boolean;
   /** Number field progression controls from the Figma `Number text field` variants. */
   numberControls?: 'icon' | 'number';
+  /** Change handler for product forms. Use with `value` for controlled fields or `defaultValue` for uncontrolled fields. */
+  onChange?: ChangeEventHandler<HTMLInputElement | HTMLTextAreaElement>;
 }
 
 /** Text entry field for labels, helper text, errors, description boxes, and numeric controls. */
@@ -40,6 +42,7 @@ export function TextField({
   visualState = 'default',
   ...props
 }: TextFieldProps) {
+  const { defaultValue, onChange, placeholder, value, ...fieldProps } = props;
   const helperId = helperText ? `${slug(label)}-helper` : undefined;
   const isDisabled = disabled || visualState === 'disabled';
   const isError = visualState === 'error';
@@ -56,9 +59,16 @@ export function TextField({
             aria-describedby={helperId}
             aria-invalid={isError || undefined}
             disabled={isDisabled}
-            placeholder={props.placeholder}
-            readOnly
-            value={String(props.value ?? '')}
+            defaultValue={value === undefined && defaultValue !== undefined ? String(defaultValue) : undefined}
+            id={fieldProps.id}
+            maxLength={fieldProps.maxLength}
+            minLength={fieldProps.minLength}
+            name={fieldProps.name}
+            onChange={onChange as ChangeEventHandler<HTMLTextAreaElement> | undefined}
+            placeholder={placeholder}
+            readOnly={fieldProps.readOnly}
+            required={fieldProps.required}
+            value={value === undefined ? undefined : String(value)}
           />
         ) : (
           <input
@@ -66,8 +76,11 @@ export function TextField({
             aria-invalid={isError || undefined}
             disabled={isDisabled}
             type={numberControls ? 'number' : 'text'}
-            {...props}
-            readOnly
+            defaultValue={defaultValue}
+            onChange={onChange as ChangeEventHandler<HTMLInputElement> | undefined}
+            placeholder={placeholder}
+            value={value}
+            {...fieldProps}
           />
         )}
         {suffix ? <span className="fds-field-slot">{suffix}</span> : null}

@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { Slider } from './Slider';
+import { useState } from 'react';
+import { Slider, type SliderValue } from './Slider';
 import { VariantGroup, VariantSection } from '../story-helpers';
 import { componentDocs } from '../docs';
 
@@ -25,6 +26,21 @@ export default meta;
 type Story = StoryObj<typeof Slider>;
 
 export const Playground: Story = {};
+
+export const Usage: Story = {
+  render: () => {
+    const [altitude, setAltitude] = useState<SliderValue>(60);
+    const [temperatureRange, setTemperatureRange] = useState<SliderValue>([20, 70]);
+    return (
+      <VariantSection title="Slider Usage">
+        <VariantGroup label="Controlled values">
+          <Slider label="Return altitude" onChange={setAltitude} unit="m" value={altitude} />
+          <Slider label="Safe temperature range" mode="range" onChange={setTemperatureRange} unit="°C" value={temperatureRange} />
+        </VariantGroup>
+      </VariantSection>
+    );
+  }
+};
 
 export const AllVariants: Story = {
   render: () => (

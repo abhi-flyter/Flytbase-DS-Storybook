@@ -486,6 +486,24 @@
   width: 100%;
 }
 
+.fds-search-clear {
+  align-items: center;
+  background: transparent;
+  border: 0;
+  color: var(--color-fds-text-icon-02);
+  cursor: pointer;
+  display: inline-flex;
+  height: 20px;
+  justify-content: center;
+  padding: 0;
+  width: 20px;
+}
+
+.fds-search-clear:disabled {
+  color: var(--color-fds-text-icon-disabled);
+  cursor: not-allowed;
+}
+
 .fds-search input::placeholder,
 .fds-field input::placeholder,
 .fds-field textarea::placeholder {

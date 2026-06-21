@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { Checkbox } from './Checkbox';
+import { useState } from 'react';
+import { Checkbox, type CheckboxSelection } from './Checkbox';
 import { VariantGroup, VariantSection } from '../story-helpers';
 import type { ControlState } from '../shared';
 import { componentDocs } from '../docs';
@@ -29,6 +30,28 @@ export default meta;
 type Story = StoryObj<typeof Checkbox>;
 
 export const Playground: Story = {};
+
+export const Usage: Story = {
+  render: () => {
+    const [selection, setSelection] = useState<CheckboxSelection>('unselected');
+    return (
+      <VariantSection title="Checkbox Usage">
+        <VariantGroup label="Controlled selection">
+          <Checkbox
+            label="Enable battery safety checks"
+            onSelectionChange={setSelection}
+            selection={selection}
+          />
+          <Checkbox
+            label="Parent with partial children"
+            onSelectionChange={setSelection}
+            selection="indeterminate"
+          />
+        </VariantGroup>
+      </VariantSection>
+    );
+  }
+};
 
 export const AllVariants: Story = {
   render: () => {

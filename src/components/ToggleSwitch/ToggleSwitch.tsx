@@ -1,6 +1,6 @@
 import type { ButtonHTMLAttributes } from 'react';
 import '../styles.css';
-import { cx, type ControlState } from '../shared';
+import { cx, type ControlState, useControllableState } from '../shared';
 
 /**
  * Switch control from Figma `Toggle switch`.
@@ -12,6 +12,10 @@ export interface ToggleSwitchProps extends ButtonHTMLAttributes<HTMLButtonElemen
   label: string;
   /** Whether the switch is on. */
   selected?: boolean;
+  /** Initial selected state for uncontrolled product use. */
+  defaultSelected?: boolean;
+  /** Called when the switch toggles on or off. */
+  onSelectedChange?: (selected: boolean) => void;
   /** Preview-only state, including the Figma loader state. */
   visualState?: ControlState | 'loader';
 }
@@ -19,20 +23,34 @@ export interface ToggleSwitchProps extends ButtonHTMLAttributes<HTMLButtonElemen
 /** Immediate toggle switch for on/off settings, including disabled and loading documentation states. */
 export function ToggleSwitch({
   className,
+  defaultSelected = false,
   disabled,
   label,
-  selected = false,
+  onClick,
+  onSelectedChange,
+  selected,
   visualState = 'default',
   ...props
 }: ToggleSwitchProps) {
+  const [isSelected, setSelected] = useControllableState({
+    defaultValue: defaultSelected,
+    onChange: onSelectedChange,
+    value: selected
+  });
   const isDisabled = disabled || visualState === 'disabled' || visualState === 'loader';
   return (
     <button
-      aria-checked={selected}
+      aria-checked={isSelected}
       className={cx('fds-switch', className)}
-      data-selected={selected ? 'yes' : 'no'}
+      data-selected={isSelected ? 'yes' : 'no'}
       data-state={visualState}
       disabled={isDisabled}
+      onClick={(event) => {
+        onClick?.(event);
+        if (!event.defaultPrevented) {
+          setSelected(!isSelected);
+        }
+      }}
       role="switch"
       type="button"
       {...props}

@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
+import { useState } from 'react';
 import { ToggleSwitch } from './ToggleSwitch';
 import { VariantGroup, VariantSection } from '../story-helpers';
 import type { ControlState } from '../shared';
@@ -27,6 +28,23 @@ export default meta;
 type Story = StoryObj<typeof ToggleSwitch>;
 
 export const Playground: Story = {};
+
+export const Usage: Story = {
+  render: () => {
+    const [enabled, setEnabled] = useState(true);
+    return (
+      <VariantSection title="Toggle Switch Usage">
+        <VariantGroup label="Controlled immediate setting">
+          <ToggleSwitch
+            label="Enable automated return-to-dock"
+            onSelectedChange={setEnabled}
+            selected={enabled}
+          />
+        </VariantGroup>
+      </VariantSection>
+    );
+  }
+};
 
 export const AllVariants: Story = {
   render: () => {

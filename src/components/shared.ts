@@ -1,3 +1,5 @@
+import { useState } from 'react';
+
 export type ControlState = 'default' | 'hover' | 'pressed' | 'focused' | 'disabled';
 
 export type FieldState =
@@ -16,4 +18,27 @@ export function cx(...classes: Array<string | undefined | false>) {
 
 export function slug(value: string) {
   return value.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+}
+
+export function useControllableState<T>({
+  defaultValue,
+  onChange,
+  value
+}: {
+  defaultValue: T;
+  onChange?: (value: T) => void;
+  value?: T;
+}) {
+  const [internalValue, setInternalValue] = useState(defaultValue);
+  const isControlled = value !== undefined;
+  const currentValue = isControlled ? value : internalValue;
+
+  function setValue(nextValue: T) {
+    if (!isControlled) {
+      setInternalValue(nextValue);
+    }
+    onChange?.(nextValue);
+  }
+
+  return [currentValue, setValue] as const;
 }

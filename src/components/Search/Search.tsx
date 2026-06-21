@@ -15,6 +15,8 @@ export interface SearchProps extends Omit<InputHTMLAttributes<HTMLInputElement>,
   size?: 'small' | 'medium';
   /** Preview-only state for documenting search states. */
   visualState?: 'default' | 'hover' | 'pressed' | 'focused' | 'active';
+  /** Called when the clear icon button is clicked. Pair with `value` for controlled search fields. */
+  onClear?: () => void;
 }
 
 /** Token-aligned search field for filtering or finding content inside the current product surface. */
@@ -22,6 +24,7 @@ export function Search({
   ariaLabel,
   className,
   disabled,
+  onClear,
   placeholder = 'Search',
   size = 'medium',
   visualState = 'default',
@@ -36,9 +39,16 @@ export function Search({
         placeholder={placeholder}
         type="search"
         {...props}
-        readOnly
       />
-      <span aria-hidden="true" className="fds-icon-slot"><Icon icon={icons.x} /></span>
+      <button
+        aria-label="Clear search"
+        className="fds-search-clear"
+        disabled={disabled}
+        onClick={onClear}
+        type="button"
+      >
+        <Icon icon={icons.x} />
+      </button>
     </label>
   );
 }

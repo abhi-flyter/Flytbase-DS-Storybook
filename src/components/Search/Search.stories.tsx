@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
+import { useState } from 'react';
 import { Search } from './Search';
 import { VariantGroup, VariantSection } from '../story-helpers';
 import { componentDocs } from '../docs';
@@ -27,6 +28,26 @@ export default meta;
 type Story = StoryObj<typeof Search>;
 
 export const Playground: Story = {};
+
+export const Usage: Story = {
+  render: () => {
+    const [query, setQuery] = useState('Drone');
+    return (
+      <VariantSection title="Search Usage">
+        <VariantGroup label="Controlled query">
+          <Search
+            ariaLabel="Search missions"
+            onChange={(event) => setQuery(event.currentTarget.value)}
+            onClear={() => setQuery('')}
+            placeholder="Search missions"
+            value={query}
+            visualState={query ? 'active' : 'default'}
+          />
+        </VariantGroup>
+      </VariantSection>
+    );
+  }
+};
 
 export const AllVariants: Story = {
   render: () => {

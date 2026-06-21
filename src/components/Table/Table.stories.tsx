@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
+import { useState } from 'react';
 import { Table } from './Table';
 import { Badge } from '../Badge';
 import { Button } from '../Button';
@@ -48,6 +49,19 @@ const rows = [
   }
 ];
 
+const selectableColumns = [
+  { key: 'name', header: 'Name' },
+  { key: 'date', header: 'Date' },
+  { key: 'drone', header: 'Drone' },
+  { key: 'files', header: 'Files' }
+] as const;
+
+const selectableRows = [
+  { name: 'Mission Alpha', date: '12 May 2023', drone: 'Mavic 2', files: '4 files' },
+  { name: 'Mission Bravo', date: '13 May 2023', drone: 'Dock 12', files: '2 files' },
+  { name: 'Mission Charlie', date: '14 May 2023', drone: 'Mavic 3', files: 'Uploading 2/1' }
+];
+
 const meta: Meta<typeof Table> = {
   title: 'Components/Table',
   component: Table,
@@ -77,6 +91,26 @@ export default meta;
 type Story = StoryObj<typeof Table>;
 
 export const Playground: Story = {};
+
+export const Usage: Story = {
+  render: () => {
+    const [selectedRowIds, setSelectedRowIds] = useState(['Mission Alpha']);
+    return (
+      <VariantSection title="Table Usage">
+        <VariantGroup label="Controlled row selection">
+          <Table
+            caption="Selectable mission table"
+            columns={selectableColumns}
+            getRowId={(row) => String(row.name)}
+            onRowSelectionChange={setSelectedRowIds}
+            rows={selectableRows}
+            selectedRowIds={selectedRowIds}
+          />
+        </VariantGroup>
+      </VariantSection>
+    );
+  }
+};
 
 export const OperationalTable: Story = {
   render: () => (

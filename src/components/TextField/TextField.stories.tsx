@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
+import { useState } from 'react';
 import { TextField } from './TextField';
 import { VariantGroup, VariantSection } from '../story-helpers';
 import type { FieldState } from '../shared';
@@ -34,6 +35,32 @@ export default meta;
 type Story = StoryObj<typeof TextField>;
 
 export const Playground: Story = {};
+
+export const Usage: Story = {
+  render: () => {
+    const [name, setName] = useState('Dock safety profile');
+    return (
+      <VariantSection title="Text Field Usage">
+        <VariantGroup label="Controlled product field">
+          <TextField
+            helperText="Use value and onChange for editable product forms."
+            label="Configuration name"
+            onChange={(event) => setName(event.currentTarget.value)}
+            value={name}
+          />
+          <TextField
+            helperText="Use multiline for description-box input."
+            label="Description"
+            multiline
+            onChange={(event) => setName(event.currentTarget.value)}
+            value={name}
+            visualState="description"
+          />
+        </VariantGroup>
+      </VariantSection>
+    );
+  }
+};
 
 export const AllVariants: Story = {
   render: () => {

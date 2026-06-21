@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
+import { useState } from 'react';
 import { FilterWidget } from './FilterWidget';
 import { VariantGroup, VariantSection } from '../story-helpers';
 import { componentDocs } from '../docs';
@@ -30,6 +31,28 @@ export default meta;
 type Story = StoryObj<typeof FilterWidget>;
 
 export const Playground: Story = {};
+
+export const Usage: Story = {
+  render: () => {
+    const [selectedValues, setSelectedValues] = useState(['scheduled']);
+    const [searchValue, setSearchValue] = useState('');
+    return (
+      <VariantSection title="Filter Widget Usage">
+        <VariantGroup label="Controlled filters">
+          <FilterWidget
+            onClear={() => setSelectedValues([])}
+            onSearchChange={setSearchValue}
+            onSelectionChange={setSelectedValues}
+            options={options}
+            searchValue={searchValue}
+            selectedValues={selectedValues}
+            state={selectedValues.length > 0 ? 'fewSelected' : 'default'}
+          />
+        </VariantGroup>
+      </VariantSection>
+    );
+  }
+};
 
 export const AllVariants: Story = {
   render: () => (

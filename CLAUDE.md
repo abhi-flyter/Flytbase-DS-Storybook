@@ -7,6 +7,7 @@ When working on UI components, always use the `fb-design-system-sb-mcp` MCP tool
 - Query `get-documentation` for a specific component to see its available properties and examples.
 - Query `get-documentation-for-story` when the component documentation does not provide enough story-level detail.
 - Only use properties that are explicitly documented or shown in example stories.
+- For interactive product screens, prefer the documented interaction APIs shown in Storybook usage stories, such as `value`/`onChange`, `selection`/`onSelectionChange`, `selected`/`onSelectedChange`, `values`/`onChange`, `order`/`onOrderChange`, and `selectedRowIds`/`onRowSelectionChange`.
 - If a property is not documented, do not assume properties based on naming conventions or patterns from other design systems. Check back with the user instead.
 - Use the `get-storybook-story-instructions` tool to fetch the latest instructions for creating or updating stories.
 - Check your work by running `run-story-tests` when the Storybook MCP testing toolset is available.

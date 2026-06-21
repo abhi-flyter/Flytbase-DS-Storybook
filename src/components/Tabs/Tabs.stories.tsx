@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
+import { useState } from 'react';
 import { Tabs } from './Tabs';
 import { Icon, icons } from '../icons';
 import { VariantGroup, VariantSection } from '../story-helpers';
@@ -33,6 +34,19 @@ export default meta;
 type Story = StoryObj<typeof Tabs>;
 
 export const Playground: Story = {};
+
+export const Usage: Story = {
+  render: () => {
+    const [value, setValue] = useState('all');
+    return (
+      <VariantSection title="Tabs Usage">
+        <VariantGroup label="Controlled active tab">
+          <Tabs items={items} onChange={setValue} value={value} />
+        </VariantGroup>
+      </VariantSection>
+    );
+  }
+};
 
 export const AllVariants: Story = {
   render: () => {

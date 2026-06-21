@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
+import { useState } from 'react';
 import { ToggleButton } from './ToggleButton';
 import { VariantGroup, VariantSection } from '../story-helpers';
 import type { ControlState } from '../shared';
@@ -31,6 +32,27 @@ export default meta;
 type Story = StoryObj<typeof ToggleButton>;
 
 export const Playground: Story = {};
+
+export const Usage: Story = {
+  render: () => {
+    const [values, setValues] = useState(['drone']);
+    return (
+      <VariantSection title="Toggle Button Usage">
+        <VariantGroup label="Controlled toggle values">
+          <ToggleButton
+            items={[
+              { value: 'drone', label: 'Drone' },
+              { value: 'dock', label: 'Dock' },
+              { value: 'route', label: 'Route' }
+            ]}
+            onChange={setValues}
+            values={values}
+          />
+        </VariantGroup>
+      </VariantSection>
+    );
+  }
+};
 
 export const AllVariants: Story = {
   render: () => {

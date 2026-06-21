@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
+import { useState } from 'react';
 import { SegmentedButton } from './SegmentedButton';
 import { VariantGroup, VariantSection } from '../story-helpers';
 import type { ControlState } from '../shared';
@@ -33,6 +34,19 @@ export default meta;
 type Story = StoryObj<typeof SegmentedButton>;
 
 export const Playground: Story = {};
+
+export const Usage: Story = {
+  render: () => {
+    const [value, setValue] = useState('map');
+    return (
+      <VariantSection title="Segmented Button Usage">
+        <VariantGroup label="Controlled segment">
+          <SegmentedButton items={sampleItems} onChange={setValue} value={value} />
+        </VariantGroup>
+      </VariantSection>
+    );
+  }
+};
 
 export const AllVariants: Story = {
   render: () => {

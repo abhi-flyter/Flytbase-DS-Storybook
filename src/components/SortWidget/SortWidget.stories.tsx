@@ -1,5 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
+import { useState } from 'react';
 import { SortWidget } from './SortWidget';
+import type { SortOrder } from './SortWidget';
 import { VariantGroup, VariantSection } from '../story-helpers';
 import { componentDocs } from '../docs';
 
@@ -25,6 +27,19 @@ export default meta;
 type Story = StoryObj<typeof SortWidget>;
 
 export const Playground: Story = {};
+
+export const Usage: Story = {
+  render: () => {
+    const [order, setOrder] = useState<SortOrder>('newest');
+    return (
+      <VariantSection title="Sort Widget Usage">
+        <VariantGroup label="Controlled sort order">
+          <SortWidget onOrderChange={setOrder} order={order} />
+        </VariantGroup>
+      </VariantSection>
+    );
+  }
+};
 
 export const AllVariants: Story = {
   render: () => (

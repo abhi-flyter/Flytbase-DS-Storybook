@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
+import { useState } from 'react';
 import { RadioButton } from './RadioButton';
 import { VariantGroup, VariantSection } from '../story-helpers';
 import type { ControlState } from '../shared';
@@ -30,6 +31,30 @@ export default meta;
 type Story = StoryObj<typeof RadioButton>;
 
 export const Playground: Story = {};
+
+export const Usage: Story = {
+  render: () => {
+    const [mode, setMode] = useState('auto');
+    return (
+      <VariantSection title="Radio Button Usage">
+        <VariantGroup label="Controlled radio group">
+          <RadioButton
+            label="Automatic"
+            name="flight-mode"
+            onSelectedChange={() => setMode('auto')}
+            selected={mode === 'auto'}
+          />
+          <RadioButton
+            label="Manual review"
+            name="flight-mode"
+            onSelectedChange={() => setMode('manual')}
+            selected={mode === 'manual'}
+          />
+        </VariantGroup>
+      </VariantSection>
+    );
+  }
+};
 
 export const AllVariants: Story = {
   render: () => {
