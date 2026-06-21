@@ -1,6 +1,6 @@
 # Phase 4 Storybook Audit
 
-Generated: 2026-06-20T21:30:19.504Z
+Generated: 2026-06-21T08:42:42.229Z
 
 Expected public components: 31
 Manifest component entries: 32
@@ -13,32 +13,32 @@ Figma parity checks failed: 0
 | Banner | yes | yes | yes | yes | yes | 2 |
 | Button | yes | yes | yes | yes | yes | 2 |
 | ButtonGroup | yes | yes | yes | yes | yes | 2 |
-| Checkbox | yes | yes | yes | yes | yes | 2 |
+| Checkbox | yes | yes | yes | yes | yes | 3 |
 | Chip | yes | yes | yes | yes | yes | 2 |
 | CircularBadge | yes | yes | yes | yes | yes | 2 |
 | DatePicker | yes | yes | yes | yes | yes | 2 |
 | Divider | yes | yes | yes | yes | yes | 2 |
 | FilterSortButton | yes | yes | yes | yes | yes | 2 |
-| FilterWidget | yes | yes | yes | yes | yes | 2 |
+| FilterWidget | yes | yes | yes | yes | yes | 3 |
 | IconButton | yes | yes | yes | yes | yes | 2 |
-| InputField | yes | yes | yes | yes | yes | 2 |
+| InputField | yes | yes | yes | yes | yes | 3 |
 | List | yes | yes | yes | yes | yes | 2 |
 | Loader | yes | yes | yes | yes | yes | 2 |
 | Menu | yes | yes | yes | yes | yes | 2 |
 | Modal | yes | yes | yes | yes | yes | 2 |
 | ProgressIndicator | yes | yes | yes | yes | yes | 2 |
-| RadioButton | yes | yes | yes | yes | yes | 2 |
-| Search | yes | yes | yes | yes | yes | 2 |
-| SegmentedButton | yes | yes | yes | yes | yes | 2 |
-| Slider | yes | yes | yes | yes | yes | 2 |
+| RadioButton | yes | yes | yes | yes | yes | 3 |
+| Search | yes | yes | yes | yes | yes | 3 |
+| SegmentedButton | yes | yes | yes | yes | yes | 3 |
+| Slider | yes | yes | yes | yes | yes | 3 |
 | Snackbar | yes | yes | yes | yes | yes | 2 |
-| SortWidget | yes | yes | yes | yes | yes | 2 |
-| Table | yes | yes | yes | yes | yes | 2 |
-| Tabs | yes | yes | yes | yes | yes | 2 |
-| TextField | yes | yes | yes | yes | yes | 2 |
+| SortWidget | yes | yes | yes | yes | yes | 3 |
+| Table | yes | yes | yes | yes | yes | 3 |
+| Tabs | yes | yes | yes | yes | yes | 3 |
+| TextField | yes | yes | yes | yes | yes | 3 |
 | Toast | yes | yes | yes | yes | yes | 2 |
-| ToggleButton | yes | yes | yes | yes | yes | 2 |
-| ToggleSwitch | yes | yes | yes | yes | yes | 2 |
+| ToggleButton | yes | yes | yes | yes | yes | 3 |
+| ToggleSwitch | yes | yes | yes | yes | yes | 3 |
 | Tooltip | yes | yes | yes | yes | yes | 2 |
 
 ## Figma Scope Reconciliation

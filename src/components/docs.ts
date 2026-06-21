@@ -20,7 +20,7 @@ export const componentDocs = {
   FilterSortButton:
     'Use FilterSortButton to open filtering or sorting widgets and communicate selected or active filter/sort state. Figma guidance says the number of active filter categories must be visible in the button, such as `2` when site and device filters are applied. Coverage includes idle, hover, pressed, focused, selected yes/no, activeFilter/Sort yes/no, 32px height, 16px icon, and active count badge.',
   FilterWidget:
-    'Filter widgets allow users to search and select filter values. Figma visual state is represented by state plus child checkbox/search states. Product screens use selectedValues/defaultSelectedValues with onSelectionChange, searchValue/defaultSearchValue with onSearchChange, and onApply/onCancel/onClear for footer actions. Figma coverage includes Filter widget states Default, 1/few selected, and all selected, a 248px panel, search header, checkbox menu rows, Select all footer, and Clear all behavior.',
+    'Filter widgets allow users to filter, search specifics, and select all or clear all line items. Figma visual state is represented by state plus child checkbox/search states. Product screens use selectedValues/defaultSelectedValues with onSelectionChange, searchValue/defaultSearchValue with onSearchChange, and onApply/onCancel/onClear for footer actions. Figma coverage includes Filter widget states Default, 1/few selected, and all selected, a 248px panel, search header, checkbox menu rows, Select all footer, and Clear all behavior.',
   IconButton:
     'Use IconButton for compact tool actions where the icon carries the meaning. Figma specifies that icon buttons always have tooltips; when focused, pressing Enter executes the action. Coverage includes default, filled, outline, small/default sizes, idle, hover, pressed, focused, and disabled states.',
   InputField:
@@ -42,7 +42,7 @@ export const componentDocs = {
   SegmentedButton:
     'Use SegmentedButton for mutually exclusive view or mode switching. Product screens use value plus onChange for the active segment. Figma coverage includes 2, 3, 4, and 5 segment layouts with selected and stateful segment parts.',
   Slider:
-    'Use Slider to set a bounded value or range. Product screens use value/defaultValue plus onChange; range mode emits a two-number array. Figma coverage includes one-slider and two-slider modes, active and disabled types, label, live top-right output, suffix unit, help text, 240px track width, and guidance that slider values reflect in real time.',
+    'Use Slider to set a bounded value or range. Figma defines range mode as supplying an array of values to the value prop. Product screens use value/defaultValue plus onChange; range mode emits a two-number array. Figma coverage includes one-slider and two-slider modes, active and disabled types, label, live top-right output, suffix unit, help text, 240px track width, and guidance that slider values reflect in real time.',
   Snackbar:
     'Use Snackbar for non-critical CRUD or info messages such as Mission saved, Zones updated, or Tag created. Figma guidance says snackbars stay visible for 10 seconds unless the close icon is clicked, persist while hovered, get replaced by simultaneous snackbars, and include shadow/elevation, type icons, optional action button, and close icon.',
   SortWidget:

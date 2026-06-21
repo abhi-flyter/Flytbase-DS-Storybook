@@ -1,4 +1,4 @@
-import type { HTMLAttributes, KeyboardEvent } from 'react';
+import { useState, type HTMLAttributes, type KeyboardEvent, type PointerEvent } from 'react';
 import '../styles.css';
 import { cx, useControllableState } from '../shared';
 
@@ -66,14 +66,50 @@ export function Slider({
   const toPercent = (nextValue: number) => ((nextValue - minNumber) / (maxNumber - minNumber)) * 100;
   const progressStart = mode === 'range' ? toPercent(rangeValues[0]) : 0;
   const progressEnd = mode === 'range' ? toPercent(rangeValues[1]) : toPercent(values[0]);
+  const [draggingIndex, setDraggingIndex] = useState<number | null>(null);
 
   function setHandleValue(index: number, nextValue: number) {
     const boundedValue = clamp(nextValue);
     if (mode === 'range') {
-      setValue(index === 0 ? [boundedValue, rangeValues[1]] : [rangeValues[0], boundedValue]);
+      setValue(index === 0 ? [Math.min(boundedValue, rangeValues[1]), rangeValues[1]] : [rangeValues[0], Math.max(boundedValue, rangeValues[0])]);
       return;
     }
     setValue(boundedValue);
+  }
+
+  function valueFromPointer(event: PointerEvent<HTMLElement>) {
+    const rect = event.currentTarget.getBoundingClientRect();
+    const percent = (event.clientX - rect.left) / rect.width;
+    const rawValue = minNumber + percent * (maxNumber - minNumber);
+    return Math.round(rawValue / step) * step;
+  }
+
+  function nearestHandleIndex(nextValue: number) {
+    if (mode !== 'range') return 0;
+    return Math.abs(nextValue - rangeValues[0]) <= Math.abs(nextValue - rangeValues[1]) ? 0 : 1;
+  }
+
+  function handlePointerDown(event: PointerEvent<HTMLSpanElement>) {
+    if (disabled) return;
+    event.preventDefault();
+    const nextValue = valueFromPointer(event);
+    const target = event.target instanceof HTMLElement ? event.target.closest<HTMLElement>('.fds-slider-handle') : null;
+    const targetIndex = target?.dataset.index ? Number(target.dataset.index) : nearestHandleIndex(nextValue);
+    setDraggingIndex(targetIndex);
+    event.currentTarget.setPointerCapture(event.pointerId);
+    setHandleValue(targetIndex, nextValue);
+  }
+
+  function handlePointerMove(event: PointerEvent<HTMLSpanElement>) {
+    if (draggingIndex === null || disabled) return;
+    setHandleValue(draggingIndex, valueFromPointer(event));
+  }
+
+  function handlePointerEnd(event: PointerEvent<HTMLSpanElement>) {
+    if (event.currentTarget.hasPointerCapture(event.pointerId)) {
+      event.currentTarget.releasePointerCapture(event.pointerId);
+    }
+    setDraggingIndex(null);
   }
 
   function handleKeyDown(event: KeyboardEvent<HTMLButtonElement>, index: number, currentHandleValue: number) {
@@ -114,7 +150,13 @@ export function Slider({
           <span>{unit}</span>
         </span>
       </span>
-      <span className="fds-slider-track">
+      <span
+        className="fds-slider-track"
+        onPointerCancel={handlePointerEnd}
+        onPointerDown={handlePointerDown}
+        onPointerMove={handlePointerMove}
+        onPointerUp={handlePointerEnd}
+      >
         <span className="fds-slider-rail" aria-hidden="true">
           <span
             className="fds-slider-fill"
@@ -134,6 +176,7 @@ export function Slider({
             aria-valuemin={minNumber}
             aria-valuenow={currentValue}
             className="fds-slider-handle"
+            data-index={index}
             disabled={disabled}
             key={index}
             onKeyDown={(event) => handleKeyDown(event, index, currentValue)}
