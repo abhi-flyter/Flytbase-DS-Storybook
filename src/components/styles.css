@@ -1296,7 +1296,7 @@ button.fds-list-row {
   align-items: start;
   color: var(--color-fds-text-icon-01);
   display: flex;
-  font-size: var(--typography-font-size-13);
+  font-size: var(--typography-font-size-14);
   justify-content: space-between;
 }
 

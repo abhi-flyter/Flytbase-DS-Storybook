@@ -45,7 +45,7 @@ Use documented FDS token names exactly. Prefer:
 - Spacing/radius: `--spacing-fds-*`.
 - Type: `--typography-*`.
 
-Do not invent aliases such as `--fds-color-surface`.
+Do not invent aliases such as `--color-fds-background`, `--color-fds-surface`, or `--fds-color-surface`.
 
 ## Agent MCP
 

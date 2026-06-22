@@ -134,7 +134,17 @@ const tokenUsageRows = [
   ['Focus ring', '--color-fds-primary-50', 'Use for visible focus outlines and active emphasis.']
 ] as const;
 
-const forbiddenTokenExamples = ['--fds-color-surface', '--fds-color-text-primary', '--fds-color-border', '--fds-color-primary'];
+const forbiddenTokenExamples = [
+  '--color-fds-background',
+  '--color-fds-surface',
+  '--color-fds-text-primary',
+  '--color-fds-border',
+  '--color-fds-primary',
+  '--fds-color-surface',
+  '--fds-color-text-primary',
+  '--fds-color-border',
+  '--fds-color-primary'
+];
 
 const spacingRows: SpacingRow[] = [
   { name: 'Size-0', rem: '0rem', px: '0px', token: '--spacing-fds-size-0' },
