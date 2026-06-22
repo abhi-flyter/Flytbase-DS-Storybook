@@ -69,29 +69,6 @@ npx mcp-add --type http --url "http://localhost:6006/mcp" --scope project
 
 Agents must read Storybook MCP documentation before using components or tokens. Start with `list-all-documentation`, then use `get-documentation`; query `foundations-tokens` before writing token-based CSS.
 
-## Figma Asset Pipeline
-
-Set `FIGMA_ACCESS_TOKEN` in `.env.local` before pulling from Figma.
-
-Refresh icons and markers from Figma:
-
-```bash
-npm run icons:refresh
-```
-
-Token export is available through:
-
-```bash
-node scripts/export-tokens-from-figma.mjs
-```
-
-Icon source nodes:
-
-- Base icons: `WRXdNp9M1SEjWPaUhU67pg`, node `25:3361`, output `src/icons/svg/`.
-- Markers and flinks: `WRXdNp9M1SEjWPaUhU67pg`, node `25:4146`, output `src/icons/svg/markers-and-flinks/`.
-
-Generated React icon components live in `src/icons/generated/` and are exported from `src/icons/index.tsx`.
-
 ## Verify
 
 Run the full local gate before pushing:
@@ -116,19 +93,6 @@ STORYBOOK_MCP_URL=http://127.0.0.1:6006/mcp npm run verify:phase5:live
 STORYBOOK_URL=http://127.0.0.1:6006 APP_URL=http://127.0.0.1:6006 node scripts/smoke-component-parity.mjs
 ```
 
-## Publish
-
-Set `CHROMATIC_PROJECT_TOKEN` locally or as a GitHub repository secret.
-
-```bash
-npm run build-storybook
-npm run verify:storybook-static
-npm run chromatic:storybook
-```
-
-The GitHub workflow at `.github/workflows/chromatic.yml` runs install, icon verification, typecheck, Storybook build, static Storybook verification, and Chromatic publish.
-
-## More Detail
 
 - Agent rules: `AGENTS.md` and `CLAUDE.md`
 - Icon source of truth: `docs/icons-source-of-truth.md`
