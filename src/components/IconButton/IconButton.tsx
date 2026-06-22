@@ -1,5 +1,6 @@
-import type { ButtonHTMLAttributes, ReactNode } from 'react';
+import type { ButtonHTMLAttributes } from 'react';
 import { Icon, icons } from '../icons';
+import type { IconGlyph } from '../icons';
 import { cx } from '../shared';
 import type { ButtonSize } from '../Button';
 
@@ -20,8 +21,8 @@ export interface IconButtonProps extends ButtonHTMLAttributes<HTMLButtonElement>
   size?: Exclude<ButtonSize, 'large'>;
   /** Preview-only state matching the Figma `State` axis. */
   visualState?: IconButtonState;
-  /** Icon rendered inside the control. */
-  icon?: ReactNode;
+  /** Icon component rendered inside the control. */
+  icon?: IconGlyph;
 }
 
 /** Compact icon-only action button for toolbar and dense control surfaces. */
@@ -29,7 +30,7 @@ export function IconButton({
   ariaLabel,
   className,
   disabled,
-  icon = <Icon icon={icons.plus} />,
+  icon = icons.plus,
   size = 'default',
   variant = 'default',
   visualState = 'idle',
@@ -46,7 +47,9 @@ export function IconButton({
       type="button"
       {...props}
     >
-      <span aria-hidden="true" className="fds-icon-slot">{icon}</span>
+      <span aria-hidden="true" className="fds-icon-slot">
+        <Icon icon={icon} />
+      </span>
     </button>
   );
 }

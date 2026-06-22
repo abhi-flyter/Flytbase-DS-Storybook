@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { IconButton, type IconButtonState, type IconButtonVariant } from './IconButton';
-import { Icon, icons } from '../icons';
+import { icons } from '../icons';
 import { VariantGroup, VariantSection } from '../story-helpers';
 import { componentDocs } from '../docs';
 
@@ -19,7 +19,7 @@ const meta: Meta<typeof IconButton> = {
   },
   args: {
     ariaLabel: 'Create item',
-    icon: <Icon icon={icons.plus} />,
+    icon: icons.plus,
     size: 'default',
     variant: 'default',
     visualState: 'idle'

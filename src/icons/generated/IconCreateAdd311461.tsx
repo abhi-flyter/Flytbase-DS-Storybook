@@ -1,0 +1,6 @@
+/* Generated from Figma SVG by scripts/generate-icon-components.mjs. */
+import type { IconProps } from '../index';
+
+export function IconCreateAdd311461({ size = 24, color = 'currentColor', title, ...props }: IconProps) {
+  return <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" width={size} height={size} color={color} role={title ? 'img' : props.role} aria-hidden={title ? undefined : (props['aria-hidden'] ?? true)} {...props}>{title ? <title>{title}</title> : null}<path d="M10.9998 13H5C4.71667 13 4.47934 12.904 4.288 12.712C4.09667 12.52 4.00067 12.2826 4 12C3.99934 11.7173 4.09534 11.48 4.288 11.288C4.48067 11.096 4.718 11 5 11H10.9998L11 5C11 4.71667 11.096 4.47934 11.288 4.288C11.48 4.09667 11.7173 4.00067 12 4C12.2827 3.99934 12.5203 4.09534 12.713 4.288C12.9057 4.48067 13.0013 4.718 13 5L12.9999 11L18.9998 11C19.2832 11 19.5208 11.096 19.7128 11.288C19.9048 11.48 20.0005 11.7173 19.9998 12C19.9992 12.2826 19.9032 12.5203 19.7118 12.713C19.5205 12.9056 19.2832 13.0013 18.9998 13L12.9999 13V19C12.9999 19.2833 12.9039 19.521 12.7119 19.713C12.5198 19.905 12.2825 20.0007 11.9998 20C11.7172 19.9993 11.4798 19.9033 11.2878 19.712C11.0958 19.5207 10.9998 19.2833 10.9998 19V13Z" fill="currentColor" fillOpacity={0.84} /></svg>
+}

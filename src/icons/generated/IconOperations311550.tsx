@@ -1,0 +1,6 @@
+/* Generated from Figma SVG by scripts/generate-icon-components.mjs. */
+import type { IconProps } from '../index';
+
+export function IconOperations311550({ size = 24, color = 'currentColor', title, ...props }: IconProps) {
+  return <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" width={size} height={size} color={color} role={title ? 'img' : props.role} aria-hidden={title ? undefined : (props['aria-hidden'] ?? true)} {...props}>{title ? <title>{title}</title> : null}<path d="M18.7026 4.0002C18.0283 3.98949 17.2169 4.40483 16.5405 5.08126C15.4331 6.07773 14.3454 7.19512 13.2973 8.32444L4.64868 6.59471L4 7.8919L10.4864 11.1351L6.81082 15.4593C5.96805 15.1821 4.64868 14.8668 4.64868 15.8917C4.64868 16.0943 4.69936 16.303 4.86496 16.5404L7.45934 19.1351C7.69672 19.3005 7.90547 19.3513 8.10802 19.3513C9.13314 19.3513 8.81762 18.0321 8.54041 17.1892L12.8647 13.5136L16.1079 20L17.4053 19.3513L15.6755 10.7028C16.8048 9.65467 17.9222 8.56697 18.9187 7.45966C19.5952 6.78322 20.0105 5.97185 19.9998 5.29754C19.9941 4.93422 19.8794 4.5884 19.6469 4.35327C19.4118 4.12071 19.0658 4.00593 18.7026 4.0002Z" fill="currentColor" fillOpacity={0.84} /></svg>
+}

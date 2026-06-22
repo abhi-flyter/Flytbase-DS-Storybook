@@ -1,0 +1,6 @@
+/* Generated from Figma SVG by scripts/generate-icon-components.mjs. */
+import type { IconProps } from '../index';
+
+export function IconDocumentLogs311542({ size = 24, color = 'currentColor', title, ...props }: IconProps) {
+  return <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" width={size} height={size} color={color} role={title ? 'img' : props.role} aria-hidden={title ? undefined : (props['aria-hidden'] ?? true)} {...props}>{title ? <title>{title}</title> : null}<path fillRule="evenodd" clipRule="evenodd" d="M6.98601 19.9998H17.4138C17.6756 20.0031 17.9354 19.9575 18.1779 19.8659C18.4204 19.7743 18.6408 19.6384 18.8259 19.4664C19.011 19.2943 19.1571 19.0895 19.2557 18.8641C19.3543 18.6387 19.4033 18.3972 19.3998 18.1539V5.84598C19.3926 5.35849 19.181 4.89285 18.8101 4.54811C18.4392 4.20337 17.9383 4.00672 17.4138 4H6.98601C6.46154 4.00672 5.96058 4.20337 5.58969 4.54811C5.2188 4.89285 5.00724 5.35849 5 5.84598V18.1539C5.00724 18.6413 5.2188 19.107 5.58969 19.4517C5.96058 19.7965 6.46154 19.9931 6.98601 19.9998ZM7.36731 7.15H11.8859V8.28332H7.36731V7.15ZM16.9617 9.79688H7.36731V10.9302H16.9617V9.79688ZM7.36731 12.4438H16.9617V13.5771H7.36731V12.4438ZM16.9617 15.0875H7.36731V16.2208H16.9617V15.0875Z" fill="currentColor" fillOpacity={0.84} /></svg>
+}

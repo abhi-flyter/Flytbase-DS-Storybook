@@ -79,6 +79,9 @@ if (packageJson.scripts?.['test-storybook'] !== 'vitest --project=storybook') {
 if (packageJson.scripts?.['verify:tokens'] !== 'node scripts/verify-token-contract.mjs') {
   throw new Error('Missing package script: "verify:tokens": "node scripts/verify-token-contract.mjs".');
 }
+if (packageJson.scripts?.['verify:icons'] !== 'node scripts/verify-icons.mjs') {
+  throw new Error('Missing package script: "verify:icons": "node scripts/verify-icons.mjs".');
+}
 if (packageJson.exports?.['./tokens.css'] !== './tokens/index.css') {
   throw new Error('Missing package export: "./tokens.css": "./tokens/index.css".');
 }
@@ -156,4 +159,14 @@ const tokenContract = spawnSync(process.execPath, ['scripts/verify-token-contrac
 if (tokenContract.status !== 0) {
   console.error('\nPhase 5 token contract verification failed.');
   process.exit(tokenContract.status ?? 1);
+}
+
+const iconContract = spawnSync(process.execPath, ['scripts/verify-icons.mjs'], {
+  stdio: 'inherit',
+  shell: false
+});
+
+if (iconContract.status !== 0) {
+  console.error('\nPhase 5 icon contract verification failed.');
+  process.exit(iconContract.status ?? 1);
 }

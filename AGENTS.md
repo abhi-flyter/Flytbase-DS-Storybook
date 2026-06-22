@@ -8,6 +8,8 @@ When working on UI components, always use the `fb-design-system-sb-mcp` MCP tool
 - Query `get-documentation-for-story` when the component documentation does not provide enough story-level detail.
 - Only use properties that are explicitly documented or shown in example stories.
 - For design tokens, query `get-documentation` for `foundations-tokens` before writing page-level CSS, layout backgrounds, text colors, borders, spacing, radius, or typography.
+- Always import `@flytbase/design-system/style.css` once in the app root before using components or token variables. If only tokens are needed, import `@flytbase/design-system/tokens.css`.
+- This design system is dark-only for now. Do not create light-mode surfaces, white app backgrounds, or alternate light token values unless the user explicitly asks for a separate product experiment.
 - Use token names exactly as documented. Prefer the FDS namespace for product UI: `--color-fds-*` for colors, `--spacing-fds-*` for spacing/radius, and `--typography-*` for type.
 - **CRITICAL: Never invent token aliases.** Do not use guessed names like `--fds-color-surface`, `--fds-color-text-primary`, `--fds-color-border`, or `--fds-color-primary`; those variables are not exported by this package.
 - For app/page backgrounds use `--color-fds-background-bg`; for primary text/icons use `--color-fds-text-icon-01`; for secondary text/icons use `--color-fds-text-icon-02`; for primary borders use `--color-fds-outline-o-primary`; for neutral interactive surfaces use `--color-fds-surface-states-surface`; for primary actions use `--color-fds-primary-200-p`.

@@ -1,0 +1,6 @@
+/* Generated from Figma SVG by scripts/generate-icon-components.mjs. */
+import type { IconProps } from '../index';
+
+export function IconSdCard231297({ size = 24, color = 'currentColor', title, ...props }: IconProps) {
+  return <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" width={size} height={size} color={color} role={title ? 'img' : props.role} aria-hidden={title ? undefined : (props['aria-hidden'] ?? true)} {...props}>{title ? <title>{title}</title> : null}<path d="M20 16.4995L20 10.4995L15.2 6.01451L5.6 5.99951C4.72 5.99951 4 6.67451 4 7.49951L4 16.4995C4 17.3245 4.72 17.9995 5.6 17.9995L18.4 17.9995C19.28 17.9995 20 17.3245 20 16.4995ZM15.2 11.9995L15.2 10.4995L18.4 10.4995L18.4 11.9995L15.2 11.9995ZM15.2 14.2495L15.2 12.7495L18.4 12.7495L18.4 14.2495L15.2 14.2495ZM15.2 16.4995L15.2 14.9995L18.4 14.9995L18.4 16.4995L15.2 16.4995Z" fill="currentColor" fillOpacity={0.84} /></svg>
+}

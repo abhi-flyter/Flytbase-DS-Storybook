@@ -1,0 +1,6 @@
+/* Generated from Figma SVG by scripts/generate-icon-components.mjs. */
+import type { IconProps } from '../index';
+
+export function IconCollapse311530({ size = 24, color = 'currentColor', title, ...props }: IconProps) {
+  return <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" width={size} height={size} color={color} role={title ? 'img' : props.role} aria-hidden={title ? undefined : (props['aria-hidden'] ?? true)} {...props}>{title ? <title>{title}</title> : null}<path d="M17.5999 6.19652C17.5999 5.5357 18.1372 5 18.7999 5C19.4627 5 20 5.5357 20 6.19652V17.5635C20 18.2243 19.4627 18.76 18.7999 18.76C18.1372 18.76 17.5999 18.2243 17.5999 17.5635V6.19652Z" fill="currentColor" fillOpacity={0.84} /><path d="M11.0888 8.14542C11.4635 7.74093 12.0962 7.71594 12.5019 8.08958L16.3129 11.5997C16.5184 11.789 16.635 12.0555 16.6343 12.3344C16.6337 12.6134 16.5158 12.8793 16.3094 13.0677L12.4984 16.5443C12.0909 16.916 11.4584 16.888 11.0855 16.4818C10.7127 16.0755 10.7408 15.4448 11.1483 15.0731L12.9732 13.4083H4.76671C4.34327 13.4083 4 13.0661 4 12.6439C4 12.2217 4.34327 11.8794 4.76671 11.8794H13.6338C13.646 11.8794 13.6581 11.8797 13.6701 11.8803L11.1448 9.55434C10.7391 9.1807 10.714 8.5499 11.0888 8.14542Z" fill="currentColor" fillOpacity={0.84} /></svg>
+}

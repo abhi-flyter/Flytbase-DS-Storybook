@@ -1,0 +1,43 @@
+name: Chromatic
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+jobs:
+  chromatic:
+    runs-on: ubuntu-latest
+    env:
+      CHROMATIC_PROJECT_TOKEN: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Verify icon contract
+        run: npm run verify:icons
+
+      - name: Typecheck
+        run: npm run typecheck
+
+      - name: Build Storybook
+        run: npm run build-storybook
+
+      - name: Verify static Storybook manifest
+        run: npm run verify:storybook-static
+
+      - name: Require Chromatic token
+        run: test -n "$CHROMATIC_PROJECT_TOKEN"
+
+      - name: Publish to Chromatic
+        run: npm run chromatic:storybook

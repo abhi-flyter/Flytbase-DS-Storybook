@@ -1,0 +1,6 @@
+/* Generated from Figma SVG by scripts/generate-icon-components.mjs. */
+import type { IconProps } from '../index';
+
+export function IconRightFacingArrow311519({ size = 24, color = 'currentColor', title, ...props }: IconProps) {
+  return <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" width={size} height={size} color={color} role={title ? 'img' : props.role} aria-hidden={title ? undefined : (props['aria-hidden'] ?? true)} {...props}>{title ? <title>{title}</title> : null}<path d="M10.6946 6.66879C10.2985 6.28462 9.66602 6.29437 9.28188 6.6905C8.89773 7.08663 8.90744 7.71911 9.30355 8.10329L13.2891 11.9685L9.30013 15.8739C8.90586 16.26 8.89918 16.8925 9.28521 17.2869C9.67124 17.6811 10.3038 17.6877 10.6981 17.3018L15.4196 12.6788C15.6122 12.4902 15.7204 12.2319 15.7198 11.9626C15.7191 11.6931 15.6097 11.4352 15.4162 11.2477L10.6946 6.66879Z" fill="currentColor" fillOpacity={0.84} /></svg>
+}

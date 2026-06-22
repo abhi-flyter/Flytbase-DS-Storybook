@@ -1,0 +1,6 @@
+/* Generated from Figma SVG by scripts/generate-icon-components.mjs. */
+import type { IconProps } from '../index';
+
+export function IconPersonIdentified311380({ size = 24, color = 'currentColor', title, ...props }: IconProps) {
+  return <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" width={size} height={size} color={color} role={title ? 'img' : props.role} aria-hidden={title ? undefined : (props['aria-hidden'] ?? true)} {...props}>{title ? <title>{title}</title> : null}<path d="M11.8667 11.4667C13.9285 11.4667 15.6 9.7952 15.6 7.73333C15.6 5.67147 13.9285 4 11.8667 4C9.8048 4 8.13333 5.67147 8.13333 7.73333C8.13333 9.7952 9.8048 11.4667 11.8667 11.4667Z" fill="currentColor" fillOpacity={0.84} /><path fillRule="evenodd" clipRule="evenodd" d="M17.7333 16.2667V19.4667C17.7333 19.608 17.6773 19.744 17.5771 19.8437C17.4773 19.944 17.3413 20 17.2 20H6.53333C6.392 20 6.256 19.944 6.15627 19.8437C6.056 19.744 6 19.608 6 19.4667V16.2667C6 14.2048 7.67147 12.5333 9.73333 12.5333H14C16.0619 12.5333 17.7333 14.2048 17.7333 16.2667Z" fill="currentColor" fillOpacity={0.84} /></svg>
+}

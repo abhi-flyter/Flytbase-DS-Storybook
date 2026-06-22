@@ -1,0 +1,149 @@
+{
+  "source": {
+    "fileKey": "WRXdNp9M1SEjWPaUhU67pg",
+    "rootNodeId": "25:4146",
+    "rootNodeName": "Frame 427322471",
+    "exportedAt": "2026-06-22T17:11:05.922Z",
+    "source": "Figma REST Images API"
+  },
+  "counts": {
+    "componentSets": 4,
+    "candidates": 11,
+    "exported": 11,
+    "missing": 0
+  },
+  "components": [
+    {
+      "id": "25:4150",
+      "name": "State=Online, Selected=No",
+      "parentComponentSetName": "Drone Marker",
+      "type": "COMPONENT",
+      "width": 50,
+      "height": 64.97753143310547,
+      "x": 6718,
+      "y": 1447,
+      "fileName": "drone-marker__state-online-selected-no__25-4150.svg",
+      "status": "exported"
+    },
+    {
+      "id": "25:4156",
+      "name": "State=Inflight, Selected=No",
+      "parentComponentSetName": "Drone Marker",
+      "type": "COMPONENT",
+      "width": 50,
+      "height": 64.97753143310547,
+      "x": 6815,
+      "y": 1447,
+      "fileName": "drone-marker__state-inflight-selected-no__25-4156.svg",
+      "status": "exported"
+    },
+    {
+      "id": "25:4162",
+      "name": "State=Inflight, Selected=Yes",
+      "parentComponentSetName": "Drone Marker",
+      "type": "COMPONENT",
+      "width": 50,
+      "height": 64.97753143310547,
+      "x": 6718,
+      "y": 1536.9775390625,
+      "fileName": "drone-marker__state-inflight-selected-yes__25-4162.svg",
+      "status": "exported"
+    },
+    {
+      "id": "25:4177",
+      "name": "State=Online, Selected=No",
+      "parentComponentSetName": "Dock marker",
+      "type": "COMPONENT",
+      "width": 40,
+      "height": 40,
+      "x": 6945,
+      "y": 1447,
+      "fileName": "dock-marker__state-online-selected-no__25-4177.svg",
+      "status": "exported"
+    },
+    {
+      "id": "25:4180",
+      "name": "State=Offline, Selected=No",
+      "parentComponentSetName": "Dock marker",
+      "type": "COMPONENT",
+      "width": 40,
+      "height": 40,
+      "x": 7022,
+      "y": 1447,
+      "fileName": "dock-marker__state-offline-selected-no__25-4180.svg",
+      "status": "exported"
+    },
+    {
+      "id": "25:4184",
+      "name": "State=Online, Selected=Yes",
+      "parentComponentSetName": "Dock marker",
+      "type": "COMPONENT",
+      "width": 40,
+      "height": 40,
+      "x": 6945,
+      "y": 1512,
+      "fileName": "dock-marker__state-online-selected-yes__25-4184.svg",
+      "status": "exported"
+    },
+    {
+      "id": "25:4187",
+      "name": "State=Offline, Selected=Yes",
+      "parentComponentSetName": "Dock marker",
+      "type": "COMPONENT",
+      "width": 40,
+      "height": 40,
+      "x": 7022,
+      "y": 1512,
+      "fileName": "dock-marker__state-offline-selected-yes__25-4187.svg",
+      "status": "exported"
+    },
+    {
+      "id": "25:4191",
+      "name": "Property 1=Doremon's Helicopter",
+      "parentComponentSetName": "Airspace Detection",
+      "type": "COMPONENT",
+      "width": 50,
+      "height": 59.488529205322266,
+      "x": 7134,
+      "y": 1439,
+      "fileName": "airspace-detection__property-1-doremons-helicopter__25-4191.svg",
+      "status": "exported"
+    },
+    {
+      "id": "25:4197",
+      "name": "Property 1=Havai Jahaj",
+      "parentComponentSetName": "Airspace Detection",
+      "type": "COMPONENT",
+      "width": 50,
+      "height": 59.488529205322266,
+      "x": 7134,
+      "y": 1514.488525390625,
+      "fileName": "airspace-detection__property-1-havai-jahaj__25-4197.svg",
+      "status": "exported"
+    },
+    {
+      "id": "25:4204",
+      "name": "Property 1=Selected",
+      "parentComponentSetName": "Safe Location Icon",
+      "type": "COMPONENT",
+      "width": 32,
+      "height": 32,
+      "x": 7242,
+      "y": 1435,
+      "fileName": "safe-location-icon__property-1-selected__25-4204.svg",
+      "status": "exported"
+    },
+    {
+      "id": "25:4212",
+      "name": "Property 1=Unselected",
+      "parentComponentSetName": "Safe Location Icon",
+      "type": "COMPONENT",
+      "width": 32,
+      "height": 32,
+      "x": 7242,
+      "y": 1483,
+      "fileName": "safe-location-icon__property-1-unselected__25-4212.svg",
+      "status": "exported"
+    }
+  ]
+}

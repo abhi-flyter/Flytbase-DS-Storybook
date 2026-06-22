@@ -31,7 +31,7 @@ export function Snackbar({ action, children, className, dismissLabel = 'Dismiss'
       <Icon icon={toneIcon} />
       <span>{children}</span>
       {action ? <span>{action}</span> : null}
-      <IconButton ariaLabel={dismissLabel} icon={<Icon icon={icons.x} />} size="small" />
+      <IconButton ariaLabel={dismissLabel} icon={icons.x} size="small" />
     </section>
   );
 }

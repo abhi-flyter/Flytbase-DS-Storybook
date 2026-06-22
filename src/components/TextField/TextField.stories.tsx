@@ -84,6 +84,7 @@ export const AllVariants: Story = {
               label={`Field ${visualState}`}
               multiline={visualState === 'description'}
               prefix="ID"
+              readOnly
               requirement={visualState === 'default' ? 'mandatory' : 'default'}
               suffix={visualState === 'active' ? '24/80' : 'Info'}
               value={visualState === 'active' ? 'Active value' : ''}
@@ -92,12 +93,12 @@ export const AllVariants: Story = {
           ))}
         </VariantGroup>
         <VariantGroup label="Number text field">
-          <TextField label="Icon progression" numberControls="icon" value={4} />
-          <TextField label="Number progression" numberControls="number" value={42} />
+          <TextField label="Icon progression" numberControls="icon" readOnly value={4} />
+          <TextField label="Number progression" numberControls="number" readOnly value={42} />
         </VariantGroup>
         <VariantGroup label="Header and phone-prefix helpers">
-          <TextField label="Phone" prefix="+91" requirement="optional" value="98765 43210" />
-          <TextField label="Mandatory asset" prefix="Asset" requirement="mandatory" suffix="Counter" value="Drone" />
+          <TextField label="Phone" prefix="+91" readOnly requirement="optional" value="98765 43210" />
+          <TextField label="Mandatory asset" prefix="Asset" readOnly requirement="mandatory" suffix="Counter" value="Drone" />
         </VariantGroup>
       </VariantSection>
     );

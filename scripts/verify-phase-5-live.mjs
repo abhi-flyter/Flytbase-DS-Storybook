@@ -8,7 +8,22 @@ const requiredServerTools = [
   'run-story-tests',
   ...requiredTools
 ];
-const requiredDocumentation = ['components-button', 'components-textfield', 'components-table'];
+const requiredDocumentation = ['components-button', 'components-textfield', 'components-table', 'foundations-tokens'];
+const requiredFoundationStories = [
+  'foundations-tokens--usage-contract',
+  'foundations-tokens--styles-parity',
+  'foundations-tokens--colors',
+  'foundations-tokens--typography',
+  'foundations-tokens--spacing-and-radius',
+  'foundations-tokens--shapes',
+  'foundations-tokens--elevations',
+  'foundations-tokens--icons',
+  'foundations-tokens--markers-and-flinks',
+  'foundations-tokens--font-awesome-guidelines',
+  'foundations-tokens--communication',
+  'foundations-icons--icon-gallery',
+  'foundations-icons--icon-playground'
+];
 const remoteMcpUrl = process.env.STORYBOOK_MCP_URL;
 
 const handler = remoteMcpUrl
@@ -84,6 +99,7 @@ const docs = await callMcp('tools/call', {
 });
 const docsText = docs.content?.map((entry) => entry.text ?? '').join('\n') ?? '';
 const missingDocumentation = requiredDocumentation.filter((id) => !docsText.includes(id));
+const missingFoundationStories = requiredFoundationStories.filter((id) => !docsText.includes(id));
 
 const buttonDocs = await callMcp('tools/call', {
   name: 'get-documentation',
@@ -130,6 +146,8 @@ const report = {
   missingTools,
   checkedDocumentation: requiredDocumentation,
   missingDocumentation,
+  requiredFoundationStories: requiredFoundationStories.length,
+  missingFoundationStories,
   buttonDocsHasProps,
   storyInstructionsChars,
   focusedStoryTestPassed
@@ -140,6 +158,7 @@ console.log(JSON.stringify(report, null, 2));
 if (
   missingTools.length > 0 ||
   missingDocumentation.length > 0 ||
+  missingFoundationStories.length > 0 ||
   !buttonDocsHasProps ||
   (remoteMcpUrl && (!storyInstructionsChars || !focusedStoryTestPassed))
 ) {

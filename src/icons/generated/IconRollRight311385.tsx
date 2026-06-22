@@ -1,0 +1,6 @@
+/* Generated from Figma SVG by scripts/generate-icon-components.mjs. */
+import type { IconProps } from '../index';
+
+export function IconRollRight311385({ size = 24, color = 'currentColor', title, ...props }: IconProps) {
+  return <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" width={size} height={size} color={color} role={title ? 'img' : props.role} aria-hidden={title ? undefined : (props['aria-hidden'] ?? true)} {...props}>{title ? <title>{title}</title> : null}<path d="M17.7633 10.0743C19.2019 10.9049 19.2019 12.9813 17.7633 13.8119L10.737 17.8686C9.29842 18.6991 7.50018 17.6609 7.50018 15.9998L7.50018 7.88648C7.50018 6.22533 9.29843 5.18712 10.737 6.01769L17.7633 10.0743Z" fill="currentColor" fillOpacity={0.84} /></svg>
+}

@@ -52,7 +52,7 @@ export function Banner({
       </span>
       <span className="fds-banner-actions">
         {actions}
-        {dismissible ? <IconButton ariaLabel={dismissLabel} icon={<Icon icon={icons.x} />} onClick={onDismiss} /> : null}
+        {dismissible ? <IconButton ariaLabel={dismissLabel} icon={icons.x} onClick={onDismiss} /> : null}
       </span>
     </section>
   );

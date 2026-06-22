@@ -1,0 +1,6 @@
+/* Generated from Figma SVG by scripts/generate-icon-components.mjs. */
+import type { IconProps } from '../index';
+
+export function IconVideoAndNetworkStats311340({ size = 24, color = 'currentColor', title, ...props }: IconProps) {
+  return <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" width={size} height={size} color={color} role={title ? 'img' : props.role} aria-hidden={title ? undefined : (props['aria-hidden'] ?? true)} {...props}>{title ? <title>{title}</title> : null}<path d="M11.5789 15.4615H13.281V17.9994H11.5789V15.4615Z" fill="#F8473A" /><path d="M14.9384 12.9231H16.6405V17.9997H14.9384V12.9231Z" fill="#F8473A" /><path d="M18.2979 9.53846H20V18H18.2979V9.53846Z" fill="#F8473A" /><path d="M14.7749 10.5862C14.7749 10.6642 14.7716 10.7438 14.7649 10.8287C15.4522 10.8469 16.0924 11.0549 16.6338 11.4016C16.4904 11.5154 16.3092 11.5834 16.1123 11.5834H14.2228C13.7578 11.5834 13.3807 11.9622 13.3807 12.4295V13.4872C13.3807 13.9545 13.0037 14.3334 12.5386 14.3334H11.0959C10.6308 14.3334 10.2538 14.7122 10.2538 15.1795V18H7.62762C5.62736 18 4 16.3912 4 14.4138C4 12.4688 5.57442 10.8803 7.52953 10.8287C7.52285 10.7438 7.51962 10.6642 7.51962 10.5862C7.51962 8.60875 9.14698 7 11.1472 7C13.1475 7 14.7749 8.60875 14.7749 10.5862Z" fill="currentColor" fillOpacity={0.84} /></svg>
+}

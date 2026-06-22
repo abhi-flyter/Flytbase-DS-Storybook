@@ -1,33 +1,53 @@
 # Flytbase Design System
 
-React components, Figma-derived tokens, Storybook documentation, and MCP setup for the Flytbase / F Design System.
+React components, Figma-derived tokens/icons, Storybook documentation, MCP access, and Chromatic publishing for the F Design System.
 
 ## Links
 
 - Storybook: https://main--6a370c8694b639efab312a0d.chromatic.com
 - Remote MCP: https://main--6a370c8694b639efab312a0d.chromatic.com/mcp
 
-## Setup
+## Local Setup
 
 ```bash
 npm install
-npm run build
 npm run storybook
 ```
 
-Local Storybook runs at:
+- Storybook: `http://localhost:6006`
+- Local MCP: `http://localhost:6006/mcp`
 
-```text
-http://localhost:6006
+## Use The Package
+
+```bash
+npm install github:abhi-flyter/Flytbase-DS-Storybook
 ```
 
-Local MCP endpoint:
+Import the stylesheet once in the app root:
 
-```text
-http://localhost:6006/mcp
+```tsx
+import '@flytbase/design-system/style.css';
 ```
 
-## Agent MCP Setup
+For tokens only:
+
+```tsx
+import '@flytbase/design-system/tokens.css';
+```
+
+Use only documented component props, token names, and icon exports from Storybook. This design system is dark-only for now.
+
+## Token Usage Rules
+
+Use documented FDS token names exactly. Prefer:
+
+- Colors: `--color-fds-*`, for example `--color-fds-background-bg`.
+- Spacing/radius: `--spacing-fds-*`.
+- Type: `--typography-*`.
+
+Do not invent aliases such as `--fds-color-surface`.
+
+## Agent MCP
 
 Use this MCP server name:
 
@@ -35,147 +55,82 @@ Use this MCP server name:
 fb-design-system-sb-mcp
 ```
 
-For shared docs access without running Storybook locally:
+Remote docs-only MCP:
 
 ```bash
 npx mcp-add --type http --url "https://main--6a370c8694b639efab312a0d.chromatic.com/mcp" --client-id "cdf3737dff9d485485968e50b63fd8b4" --scope project
 ```
 
-If `mcp-add` asks where to install the server, choose your actual coding agent, for example Claude Code, Cursor, or VS Code. Use `fb-design-system-sb-mcp` as the server name.
-
-For local development/testing tools:
+Local development/testing MCP:
 
 ```bash
 npx mcp-add --type http --url "http://localhost:6006/mcp" --scope project
 ```
 
-Claude Code example:
+Agents must read Storybook MCP documentation before using components or tokens. Start with `list-all-documentation`, then use `get-documentation`; query `foundations-tokens` before writing token-based CSS.
+
+## Figma Asset Pipeline
+
+Set `FIGMA_ACCESS_TOKEN` in `.env.local` before pulling from Figma.
+
+Refresh icons and markers from Figma:
 
 ```bash
-claude mcp add fb-design-system-sb-mcp --transport http https://main--6a370c8694b639efab312a0d.chromatic.com/mcp --scope project
+npm run icons:refresh
 ```
 
-The remote MCP exposes documentation tools. The local MCP also exposes development/testing tools such as story preview and story tests.
-
-## Use In A Flink Project
-
-Install the design system package from GitHub:
+Token export is available through:
 
 ```bash
-npm install github:abhi-flyter/Flytbase-DS-Storybook
+node scripts/export-tokens-from-figma.mjs
 ```
 
-Import the stylesheet once in your app root:
+Icon source nodes:
 
-```tsx
-import '@flytbase/design-system/style.css';
-```
+- Base icons: `WRXdNp9M1SEjWPaUhU67pg`, node `25:3361`, output `src/icons/svg/`.
+- Markers and flinks: `WRXdNp9M1SEjWPaUhU67pg`, node `25:4146`, output `src/icons/svg/markers-and-flinks/`.
 
-If a product only needs the CSS variables, import the token file:
-
-```tsx
-import '@flytbase/design-system/tokens.css';
-```
-
-Use documented components in product code:
-
-```tsx
-import { Button, InputField, Slider, Table, Tabs, TextField } from '@flytbase/design-system';
-
-export function SettingsPanel() {
-  return (
-    <section>
-      <TextField label="Profile name" value="Return-to-dock policy" readOnly />
-      <InputField label="Primary drone" active value="Mavic 3 Enterprise" />
-      <Slider label="Return altitude" unit="m" value={60} />
-      <Button>Save changes</Button>
-    </section>
-  );
-}
-```
-
-Pair this package with the MCP server in the same Flink repo:
-
-```bash
-claude mcp add fb-design-system-sb-mcp --transport http https://main--6a370c8694b639efab312a0d.chromatic.com/mcp --scope project
-```
-
-The package gives the project real React components. The MCP gives agents the Storybook documentation they must read before using those components.
-
-## Token Usage Rules
-
-Use the documented FDS token namespace exactly:
-
-```css
-body {
-  background: var(--color-fds-background-bg);
-  color: var(--color-fds-text-icon-01);
-}
-
-.panel {
-  background: var(--color-fds-background-level-2);
-  border: 1px solid var(--color-fds-outline-o-primary);
-}
-```
-
-Do not invent aliases like:
-
-```css
-/* Invalid: these variables are not exported by the package. */
---fds-color-surface
---fds-color-text-primary
---fds-color-border
---fds-color-primary
-```
-
-For product UI, prefer:
-
-- `--color-fds-*` for colors
-- `--spacing-fds-*` for spacing and radius
-- `--typography-*` for type
-
-## Agent Rules
-
-Agents should follow `AGENTS.md` or `CLAUDE.md`:
-
-- Query Storybook MCP before choosing components or props.
-- Never invent component props.
-- Never invent token names or icon keys.
-- Use `list-all-documentation`, then `get-documentation`.
-- Query `get-documentation` for `foundations-tokens` before writing page-level CSS.
-- Use only documented props or examples from stories.
-- Ask before using undocumented APIs.
+Generated React icon components live in `src/icons/generated/` and are exported from `src/icons/index.tsx`.
 
 ## Verify
 
+Run the full local gate before pushing:
+
 ```bash
-npm run build
 npm run typecheck
+npm run build:lib
 npm run build-storybook
 npm run verify:tokens
+npm run verify:icons
+npm run verify:foundations
+npm run verify:storybook-static
 npm run verify:phase4
 npm run verify:phase5
-npm run verify:phase5:live
 npm run test-storybook
 ```
 
-To verify a running local MCP server:
+With local Storybook running, verify MCP and live story smoke:
 
 ```bash
 STORYBOOK_MCP_URL=http://127.0.0.1:6006/mcp npm run verify:phase5:live
+STORYBOOK_URL=http://127.0.0.1:6006 APP_URL=http://127.0.0.1:6006 node scripts/smoke-component-parity.mjs
 ```
 
 ## Publish
 
+Set `CHROMATIC_PROJECT_TOKEN` locally or as a GitHub repository secret.
+
 ```bash
-npx chromatic --project-token=<CHROMATIC_PROJECT_TOKEN>
+npm run build-storybook
+npm run verify:storybook-static
+npm run chromatic:storybook
 ```
 
-Do not commit Chromatic tokens. Use local env vars, CI secrets, or one-off CLI usage.
+The GitHub workflow at `.github/workflows/chromatic.yml` runs install, icon verification, typecheck, Storybook build, static Storybook verification, and Chromatic publish.
 
 ## More Detail
 
-- Component/Figma audit: `docs/phase-4/audit.md`
-- MCP readiness notes: `docs/phase-5/storybook-mcp-readiness.md`
-- Storybook config: `.storybook/main.ts`
-- MCP config: `.mcp.json`
+- Agent rules: `AGENTS.md` and `CLAUDE.md`
+- Icon source of truth: `docs/icons-source-of-truth.md`
+- Storybook MCP readiness: `docs/phase-5/storybook-mcp-readiness.md`
+- Figma parity audit: `docs/phase-4/audit.md`

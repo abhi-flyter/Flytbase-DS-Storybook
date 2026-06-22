@@ -1,0 +1,6 @@
+/* Generated from Figma SVG by scripts/generate-icon-components.mjs. */
+import type { IconProps } from '../index';
+
+export function IconCheckpoint311379({ size = 24, color = 'currentColor', title, ...props }: IconProps) {
+  return <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" width={size} height={size} color={color} role={title ? 'img' : props.role} aria-hidden={title ? undefined : (props['aria-hidden'] ?? true)} {...props}>{title ? <title>{title}</title> : null}<path d="M16.8898 8.26667L18.0908 4.712C18.1179 4.63163 18.1263 4.54557 18.1153 4.46105C18.1044 4.37654 18.0744 4.29603 18.028 4.22628C17.9815 4.15653 17.9199 4.09958 17.8483 4.06021C17.7767 4.02084 17.6972 4.00019 17.6165 4H5.50466C5.37081 4 5.24245 4.05619 5.14781 4.15621C5.05317 4.25623 5 4.39188 5 4.53333V19.4667C5 19.6081 5.05317 19.7438 5.14781 19.8438C5.24245 19.9438 5.37081 20 5.50466 20C5.6385 20 5.76686 19.9438 5.86151 19.8438C5.95615 19.7438 6.00932 19.6081 6.00932 19.4667V12.5333H17.6165C17.6972 12.5331 17.7767 12.5125 17.8483 12.4731C17.9199 12.4338 17.9815 12.3768 18.028 12.3071C18.0744 12.2373 18.1044 12.1568 18.1153 12.0723C18.1263 11.9878 18.1179 11.9017 18.0908 11.8213L16.8898 8.26667Z" fill="currentColor" fillOpacity={0.84} /></svg>
+}

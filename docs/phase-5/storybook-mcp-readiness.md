@@ -24,6 +24,7 @@ Phase 5 connects the F Design System Storybook to AI agents through Storybook MC
 - `.mcp.json` declares the project-level `fb-design-system-sb-mcp` HTTP server at `http://localhost:6006/mcp`.
 - `npm run verify:phase5` checks the Phase 5 file/config/static-manifest gates.
 - `npm run verify:tokens` checks the token naming contract, forbidden alias examples, README guidance, and package token CSS export.
+- `npm run verify:icons` checks the Figma-exported SVG icon contract, generated React icon components, marker component coverage, Storybook icon stories, and removal of third-party icon runtime dependencies.
 - `npm run verify:phase5:live` checks MCP initialization, tool discovery, documentation lookup, and component prop retrieval.
 - With `STORYBOOK_MCP_URL=http://127.0.0.1:6208/mcp`, `npm run verify:phase5:live` also verifies the running Storybook MCP development/testing toolset and runs a focused story test through `run-story-tests`.
 - `npm run test-storybook` passes locally with 32 test files and 65 tests.
@@ -97,6 +98,7 @@ Agents must:
 - Use `--color-fds-background-bg` for app/page backgrounds, `--color-fds-text-icon-01` for primary text/icons, `--color-fds-text-icon-02` for secondary text/icons, `--color-fds-outline-o-primary` for primary borders, `--color-fds-surface-states-surface` for neutral interactive surfaces, and `--color-fds-primary-200-p` for primary actions.
 - Never invent token aliases such as `--fds-color-surface`, `--fds-color-text-primary`, `--fds-color-border`, or `--fds-color-primary`.
 - Use only documented/exported icon keys; ask before inventing icon names.
+- Use `Foundations/Icons` and `src/icons/index.tsx` as the icon source of truth; semantic aliases in `src/components/icons.tsx` must point at generated Figma icon components.
 - Use `get-storybook-story-instructions` before adding or updating stories when the development toolset is available.
 - Run `run-story-tests` when connected through an agent that exposes the MCP testing toolset, or run `npm run test-storybook` locally.
 - Ask the user before using undocumented props.
@@ -116,6 +118,8 @@ The agent should call `list-all-documentation` through `fb-design-system-sb-mcp`
 ```bash
 npm run verify:phase5
 npm run verify:tokens
+npm run verify:icons
+npm run verify:foundations
 npm run verify:phase5:live
 STORYBOOK_MCP_URL=http://127.0.0.1:6208/mcp npm run verify:phase5:live
 npm run test-storybook

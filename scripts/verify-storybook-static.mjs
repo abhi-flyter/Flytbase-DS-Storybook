@@ -44,7 +44,20 @@ const importantStories = [
   'components-filtersortbutton--all-variants',
   'components-table--operational-table',
   'components-tabs--all-variants',
-  'components-tooltip--all-variants'
+  'components-tooltip--all-variants',
+  'foundations-tokens--usage-contract',
+  'foundations-tokens--styles-parity',
+  'foundations-tokens--colors',
+  'foundations-tokens--typography',
+  'foundations-tokens--spacing-and-radius',
+  'foundations-tokens--shapes',
+  'foundations-tokens--elevations',
+  'foundations-tokens--icons',
+  'foundations-tokens--markers-and-flinks',
+  'foundations-tokens--font-awesome-guidelines',
+  'foundations-tokens--communication',
+  'foundations-icons--icon-gallery',
+  'foundations-icons--icon-playground'
 ];
 
 const indexPath = path.join('storybook-static', 'index.json');

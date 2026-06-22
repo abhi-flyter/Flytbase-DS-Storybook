@@ -1,0 +1,6 @@
+/* Generated from Figma SVG by scripts/generate-icon-components.mjs. */
+import type { IconProps } from '../index';
+
+export function IconNeworkRate311547({ size = 24, color = 'currentColor', title, ...props }: IconProps) {
+  return <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" width={size} height={size} color={color} role={title ? 'img' : props.role} aria-hidden={title ? undefined : (props['aria-hidden'] ?? true)} {...props}>{title ? <title>{title}</title> : null}<path d="M12 6C7.58765 6 4 9.58768 4 14C4 15.7306 4.5551 17.3383 5.4922 18.6485L6.27345 18.0313C5.563 17.0213 5.11632 15.8081 5.02345 14.5H6.5H7V13.5H6.5H5.02345C5.13327 11.9395 5.74725 10.5244 6.71095 9.41406L7.7578 10.461L8.10938 10.8125L8.8203 10.1094L8.46095 9.75781L7.41405 8.70312C8.52375 7.74133 9.9413 7.13315 11.5 7.02345V8.5V9H12.5V8.5V7.02345C14.0587 7.13315 15.4762 7.74133 16.586 8.70312L15.539 9.75781L15.1797 10.1094L15.8906 10.8125L16.2422 10.461L17.289 9.41406C18.2527 10.5244 18.8667 11.9395 18.9765 13.5H17.5H17V14.5H17.5H18.9765C18.8836 15.8081 18.437 17.0213 17.7265 18.0313L18.5078 18.6485C19.4448 17.3383 20 15.7306 20 14C20 9.58768 16.4123 6 12 6ZM16.4219 12.3281L11.1172 15.8672C10.629 16.3554 10.629 17.1447 11.1172 17.6328C11.6054 18.121 12.3947 18.121 12.8828 17.6328L16.4219 12.3281Z" fill="currentColor" fillOpacity={0.84} /></svg>
+}

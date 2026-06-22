@@ -1,5 +1,5 @@
 import type { ReactNode } from 'react';
-import { Icon, icons } from '../icons';
+import { icons } from '../icons';
 import { IconButton } from '../IconButton';
 import { cx } from '../shared';
 
@@ -29,7 +29,7 @@ export function Modal({ children, className, footer, size = 'medium', tertiaryAc
     <section aria-modal="true" className={cx('fds-modal', className)} data-size={size} role="dialog">
       <header>
         <strong>{title}</strong>
-        <IconButton ariaLabel="Close" icon={<Icon icon={icons.x} />} size="small" />
+        <IconButton ariaLabel="Close" icon={icons.x} size="small" />
       </header>
       <div className="fds-modal-body">{children}</div>
       {footer || tertiaryAction ? (

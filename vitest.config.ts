@@ -9,6 +9,12 @@ const dirname =
   typeof __dirname !== 'undefined' ? __dirname : path.dirname(fileURLToPath(import.meta.url));
 
 export default defineConfig({
+  optimizeDeps: {
+    include: ['react', 'react-dom', 'react/jsx-runtime', 'react/jsx-dev-runtime']
+  },
+  resolve: {
+    dedupe: ['react', 'react-dom']
+  },
   test: {
     projects: [
       {

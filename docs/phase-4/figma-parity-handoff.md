@@ -51,4 +51,4 @@ Screenshot-level visual parity QA is intentionally skipped for this Phase 4 comp
 
 - Pixel-level color, spacing, typography, border, radius, shadow, icon, and state-style comparisons are optional future visual QA.
 - Browser screenshot comparison is not required to mark Phase 4 complete.
-- Exact exported Figma icon-asset comparison remains optional because the implementation uses shared `lucide-react` icons mapped to the documented Figma icon roles.
+- Exact icon asset coverage is now handled by committed Figma SVG manifests, generated React icon components, and the `Foundations/Icons` Storybook gallery/playground.

@@ -1,0 +1,6 @@
+/* Generated from Figma SVG by scripts/generate-icon-components.mjs. */
+import type { IconProps } from '../index';
+
+export function IconShapeAnnotaion254112({ size = 24, color = 'currentColor', title, ...props }: IconProps) {
+  return <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" width={size} height={size} color={color} role={title ? 'img' : props.role} aria-hidden={title ? undefined : (props['aria-hidden'] ?? true)} {...props}>{title ? <title>{title}</title> : null}<path fillRule="evenodd" clipRule="evenodd" d="M8.26667 6.13333C8.26667 4.95513 7.31154 4 6.13333 4C4.95513 4 4 4.95513 4 6.13333C4 7.31151 4.95508 8.26662 6.13325 8.26667V17.8667L15.7335 17.8667C15.7335 19.0449 16.6886 20 17.8668 20C19.045 20 20.0002 19.0449 20.0002 17.8667C20.0002 16.6885 19.045 15.7333 17.8668 15.7333L17.8666 6.13333L8.26667 6.13333ZM7.02214 8.07327V16.9778H15.9269C16.1398 16.5141 16.514 16.1398 16.9777 15.9269V7.02222H8.07323C7.86034 7.48606 7.48599 7.8604 7.02214 8.07327Z" fill="currentColor" fillOpacity={0.84} /></svg>
+}

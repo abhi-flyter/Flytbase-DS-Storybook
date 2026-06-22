@@ -1,9 +1,9 @@
 # Phase 4 Storybook Audit
 
-Generated: 2026-06-22T04:20:25.891Z
+Generated: 2026-06-22T17:59:38.469Z
 
 Expected public components: 31
-Manifest component entries: 32
+Manifest component entries: 33
 Components with incomplete gates: 0
 Figma parity checks failed: 0
 
@@ -328,6 +328,7 @@ Source: `WRXdNp9M1SEjWPaUhU67pg`, page `104:2807`.
 - `storybook-static/manifests/components.json` is verified for all 31 expected public components.
 - Every expected component must have at least two generated Storybook stories and a generated docs entry.
 - Key all-variant stories are asserted for Buttons, Menu, Modals, Loaders, Date picker, Filter/Sort button, Table, Tabs, and Tooltips.
+- `Foundations/Icons` is verified through the static Storybook index, and `npm run verify:icons` checks generated Figma SVG component coverage.
 
 ## Figma Access Status
 
@@ -337,4 +338,4 @@ The duplicate Figma file is accessible through Figma MCP metadata and screenshot
 
 - Screenshot-level visual parity QA is intentionally skipped for this Phase 4 completion pass.
 - Pixel-level color, spacing, typography, border, radius, shadow, and state-style comparisons should be treated as optional future visual QA, not a remaining Phase 4 blocker.
-- Exact exported Figma icon-asset comparison remains optional because the Storybook implementation uses shared `lucide-react` icons mapped to the documented Figma icon roles.
+- Exact icon asset coverage is now handled by the committed Figma SVG manifests, generated React icon components, and `Foundations/Icons` Storybook stories.

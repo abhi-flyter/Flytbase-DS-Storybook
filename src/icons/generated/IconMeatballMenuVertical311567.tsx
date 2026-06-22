@@ -1,0 +1,6 @@
+/* Generated from Figma SVG by scripts/generate-icon-components.mjs. */
+import type { IconProps } from '../index';
+
+export function IconMeatballMenuVertical311567({ size = 24, color = 'currentColor', title, ...props }: IconProps) {
+  return <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" width={size} height={size} color={color} role={title ? 'img' : props.role} aria-hidden={title ? undefined : (props['aria-hidden'] ?? true)} {...props}>{title ? <title>{title}</title> : null}<path d="M14.093 6.41955C14.093 7.54981 13.1768 8.46606 12.0465 8.46606C10.9163 8.46606 10 7.54981 10 6.41955C10 5.2893 10.9163 4.37305 12.0465 4.37305C13.1768 4.37305 14.093 5.2893 14.093 6.41955Z" fill="currentColor" fillOpacity={0.84} /><path d="M14.093 12.3729C14.093 13.5032 13.1768 14.4194 12.0465 14.4194C10.9163 14.4194 10 13.5032 10 12.3729C10 11.2427 10.9163 10.3264 12.0465 10.3264C13.1768 10.3264 14.093 11.2427 14.093 12.3729Z" fill="currentColor" fillOpacity={0.84} /><path d="M14.093 18.3265C14.093 19.4568 13.1768 20.373 12.0465 20.373C10.9163 20.373 10 19.4568 10 18.3265C10 17.1963 10.9163 16.28 12.0465 16.28C13.1768 16.28 14.093 17.1963 14.093 18.3265Z" fill="currentColor" fillOpacity={0.84} /></svg>
+}

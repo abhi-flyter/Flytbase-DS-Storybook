@@ -1,0 +1,6 @@
+/* Generated from Figma SVG by scripts/generate-icon-components.mjs. */
+import type { IconProps } from '../index';
+
+export function IconGraph311350({ size = 24, color = 'currentColor', title, ...props }: IconProps) {
+  return <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" width={size} height={size} color={color} role={title ? 'img' : props.role} aria-hidden={title ? undefined : (props['aria-hidden'] ?? true)} {...props}>{title ? <title>{title}</title> : null}<path d="M7.13534 8.94857H4.80223C4.35917 8.94857 4 9.31053 4 9.75703V19.1915C4 19.638 4.35917 20 4.80223 20H7.13534C7.5784 20 7.93757 19.638 7.93757 19.1915V9.75703C7.93757 9.31053 7.5784 8.94857 7.13534 8.94857Z" fill="currentColor" fillOpacity={0.84} /><path d="M12.1608 4H9.8277C9.38464 4 9.02546 4.36196 9.02546 4.80846V19.1902C9.02546 19.6367 9.38464 19.9986 9.8277 19.9986H12.1608C12.6039 19.9986 12.963 19.6367 12.963 19.1902V4.80846C12.963 4.36196 12.6039 4 12.1608 4Z" fill="currentColor" fillOpacity={0.84} /><path d="M17.1978 11.559H14.8647C14.4216 11.559 14.0624 11.921 14.0624 12.3675V19.1912C14.0624 19.6377 14.4216 19.9997 14.8647 19.9997H17.1978C17.6408 19.9997 18 19.6377 18 19.1912V12.3675C18 11.921 17.6408 11.559 17.1978 11.559Z" fill="currentColor" fillOpacity={0.84} /></svg>
+}

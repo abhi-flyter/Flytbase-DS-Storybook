@@ -68,6 +68,7 @@ export const AllVariants: Story = {
                 key={`${size}-${visualState}`}
                 ariaLabel={`${size} ${visualState} search`}
                 placeholder={visualState === 'active' ? 'Search drones' : 'Search'}
+                readOnly
                 size={size}
                 value={visualState === 'active' ? 'Drone' : ''}
                 visualState={visualState}
