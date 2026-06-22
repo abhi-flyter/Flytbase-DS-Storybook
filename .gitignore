@@ -7,6 +7,3 @@ dist/
 build-storybook.log
 debug-storybook.log
 *.tgz
-.env
-.env.local
-.env.*.local

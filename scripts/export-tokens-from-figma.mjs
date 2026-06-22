@@ -1,15 +1,10 @@
 #!/usr/bin/env node
 
 import { mkdir, writeFile } from 'node:fs/promises';
-import { existsSync, readFileSync } from 'node:fs';
-import { resolve } from 'node:path';
-
-loadLocalEnv();
+import { dirname, resolve } from 'node:path';
 
 const DEFAULT_FILE_KEY = 'WRXdNp9M1SEjWPaUhU67pg';
-const DEFAULT_FILE_NAME = 'F Design System 2.0 Copy';
 const fileKey = process.env.FIGMA_FILE_KEY || DEFAULT_FILE_KEY;
-const fileName = process.env.FIGMA_FILE_NAME || DEFAULT_FILE_NAME;
 const token = process.env.FIGMA_ACCESS_TOKEN || process.env.FIGMA_TOKEN;
 const outDir = resolve(process.cwd(), process.argv[2] || 'tokens');
 
@@ -142,7 +137,6 @@ const indexCss = '@import "./primitive.css";\n@import "./semantic-light.css";\n@
 const manifest = {
   source: {
     fileKey,
-    fileName,
     exportedAt: new Date().toISOString(),
     source: 'Figma REST Variables API',
   },
@@ -152,16 +146,7 @@ const manifest = {
     Spacing: { count: varsFor('Spacing').length, output: 'tokens/semantic-light.css' },
     Typography: { count: varsFor('Typography').length, output: 'tokens/semantic-light.css' },
   },
-  cssVariableCounts: {
-    primitive: (primitiveCss.match(/^\s+--/gm) || []).length,
-    semanticLight: (semanticLightCss.match(/^\s+--/gm) || []).length,
-  },
   storybookImports: ['tokens/primitive.css', 'tokens/semantic-light.css', 'tokens/semantic-dark.css'],
-  notes: [
-    'Color semantic variables preserve Figma alias relationships with CSS var() references to primitive variables.',
-    'Spacing values are emitted as rem units for ordinary size tokens and px for full-radius tokens.',
-    'No dark-mode variable mode exists in the source file yet; semantic-dark.css is intentionally a placeholder.',
-  ],
 };
 
 await mkdir(outDir, { recursive: true });
@@ -172,20 +157,3 @@ await writeFile(resolve(outDir, 'index.css'), indexCss);
 await writeFile(resolve(outDir, 'tokens.manifest.json'), `${JSON.stringify(manifest, null, 2)}\n`);
 
 console.log(`Exported Figma tokens to ${outDir}`);
-
-function loadLocalEnv() {
-  for (const file of ['.env.local', '.env']) {
-    const path = resolve(process.cwd(), file);
-    if (!existsSync(path)) continue;
-    const lines = readFileSync(path, 'utf8').split(/\r?\n/);
-    for (const line of lines) {
-      const trimmed = line.trim();
-      if (!trimmed || trimmed.startsWith('#')) continue;
-      const match = trimmed.match(/^([A-Za-z_][A-Za-z0-9_]*)=(.*)$/);
-      if (!match) continue;
-      const [, key, rawValue] = match;
-      if (process.env[key]) continue;
-      process.env[key] = rawValue.replace(/^['"]|['"]$/g, '');
-    }
-  }
-}
