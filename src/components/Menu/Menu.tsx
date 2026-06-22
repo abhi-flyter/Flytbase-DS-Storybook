@@ -1,5 +1,4 @@
 import type { ReactNode } from 'react';
-import '../styles.css';
 import { Checkbox } from '../Checkbox';
 import { Icon, icons } from '../icons';
 import { cx, type ControlState } from '../shared';

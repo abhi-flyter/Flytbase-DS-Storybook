@@ -1,5 +1,4 @@
 import type { ButtonHTMLAttributes, ReactNode } from 'react';
-import '../styles.css';
 import { Icon, icons } from '../icons';
 import { cx } from '../shared';
 import type { ButtonSize } from '../Button';

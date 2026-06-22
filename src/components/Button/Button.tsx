@@ -1,5 +1,4 @@
 import type { ButtonHTMLAttributes, ReactNode } from 'react';
-import '../styles.css';
 import { cx } from '../shared';
 
 export type ButtonVariant = 'primary' | 'secondary' | 'outline' | 'tonal' | 'text' | 'link';

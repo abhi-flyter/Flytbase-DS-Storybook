@@ -1,5 +1,4 @@
 import type { ChangeEventHandler, InputHTMLAttributes, ReactNode } from 'react';
-import '../styles.css';
 import { cx, slug, type FieldState } from '../shared';
 
 /**

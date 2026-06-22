@@ -1,5 +1,4 @@
 import type { ReactNode } from 'react';
-import '../styles.css';
 import { Icon, icons } from '../icons';
 import { IconButton } from '../IconButton';
 import { cx } from '../shared';

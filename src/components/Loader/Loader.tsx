@@ -1,4 +1,3 @@
-import '../styles.css';
 import { cx } from '../shared';
 
 export type LoaderVariant = 'search' | 'table' | 'panel' | 'button';

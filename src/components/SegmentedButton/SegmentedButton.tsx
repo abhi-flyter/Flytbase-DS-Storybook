@@ -1,5 +1,4 @@
 import type { ReactNode } from 'react';
-import '../styles.css';
 import { cx, type ControlState } from '../shared';
 
 export interface SegmentedButtonItem {

@@ -1,5 +1,4 @@
 import type { CSSProperties } from 'react';
-import '../styles.css';
 import { cx } from '../shared';
 
 /**

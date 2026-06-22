@@ -1,6 +1,6 @@
-# Flytbase Design System Storybook
+# Flytbase Design System
 
-Storybook documentation and MCP setup for the Flytbase / F Design System component library.
+React components, Figma-derived tokens, Storybook documentation, and MCP setup for the Flytbase / F Design System.
 
 ## Links
 
@@ -11,6 +11,7 @@ Storybook documentation and MCP setup for the Flytbase / F Design System compone
 
 ```bash
 npm install
+npm run build
 npm run storybook
 ```
 
@@ -56,6 +57,45 @@ claude mcp add fb-design-system-sb-mcp --transport http https://main--6a370c8694
 
 The remote MCP exposes documentation tools. The local MCP also exposes development/testing tools such as story preview and story tests.
 
+## Use In A Flink Project
+
+Install the design system package from GitHub:
+
+```bash
+npm install github:abhi-flyter/Flytbase-DS-Storybook
+```
+
+Import the stylesheet once in your app root:
+
+```tsx
+import '@flytbase/design-system/style.css';
+```
+
+Use documented components in product code:
+
+```tsx
+import { Button, InputField, Slider, Table, Tabs, TextField } from '@flytbase/design-system';
+
+export function SettingsPanel() {
+  return (
+    <section>
+      <TextField label="Profile name" value="Return-to-dock policy" readOnly />
+      <InputField label="Primary drone" active value="Mavic 3 Enterprise" />
+      <Slider label="Return altitude" unit="m" value={60} />
+      <Button>Save changes</Button>
+    </section>
+  );
+}
+```
+
+Pair this package with the MCP server in the same Flink repo:
+
+```bash
+claude mcp add fb-design-system-sb-mcp --transport http https://main--6a370c8694b639efab312a0d.chromatic.com/mcp --scope project
+```
+
+The package gives the project real React components. The MCP gives agents the Storybook documentation they must read before using those components.
+
 ## Agent Rules
 
 Agents should follow `AGENTS.md` or `CLAUDE.md`:
@@ -69,6 +109,7 @@ Agents should follow `AGENTS.md` or `CLAUDE.md`:
 ## Verify
 
 ```bash
+npm run build
 npm run typecheck
 npm run build-storybook
 npm run verify:phase4

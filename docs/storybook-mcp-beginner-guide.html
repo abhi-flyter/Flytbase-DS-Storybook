@@ -1,0 +1,781 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Flytbase Design System Storybook MCP Guide</title>
+    <style>
+      :root {
+        color-scheme: dark;
+        --bg: #0d0f12;
+        --panel: #15181d;
+        --panel-2: #1b2027;
+        --line: #303743;
+        --text: #f3f6fb;
+        --muted: #aab4c2;
+        --quiet: #748093;
+        --blue: #4f7cff;
+        --cyan: #47d5d9;
+        --green: #62d58c;
+        --amber: #f4c86a;
+        --red: #f27878;
+        --shadow: 0 24px 80px rgba(0, 0, 0, 0.45);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        margin: 0;
+        min-height: 100%;
+      }
+
+      body {
+        background:
+          linear-gradient(90deg, rgba(79, 124, 255, 0.12), transparent 30%),
+          radial-gradient(circle at 75% 12%, rgba(71, 213, 217, 0.13), transparent 28%),
+          var(--bg);
+        color: var(--text);
+        font-family:
+          Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        line-height: 1.5;
+        overflow: hidden;
+      }
+
+      button,
+      code {
+        font: inherit;
+      }
+
+      .deck {
+        display: grid;
+        grid-template-rows: auto 1fr auto;
+        height: 100vh;
+      }
+
+      .topbar,
+      .footer {
+        align-items: center;
+        display: flex;
+        justify-content: space-between;
+        padding: 18px 28px;
+      }
+
+      .brand {
+        align-items: center;
+        display: inline-flex;
+        gap: 12px;
+        min-width: 0;
+      }
+
+      .mark {
+        background: linear-gradient(135deg, var(--blue), var(--cyan));
+        border-radius: 8px;
+        box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.16) inset;
+        height: 28px;
+        position: relative;
+        width: 28px;
+      }
+
+      .mark::before,
+      .mark::after {
+        background: rgba(255, 255, 255, 0.88);
+        border-radius: 999px;
+        content: "";
+        position: absolute;
+      }
+
+      .mark::before {
+        height: 4px;
+        left: 7px;
+        top: 8px;
+        width: 14px;
+      }
+
+      .mark::after {
+        height: 12px;
+        left: 12px;
+        top: 8px;
+        width: 4px;
+      }
+
+      .brand strong {
+        display: block;
+        font-size: 14px;
+        letter-spacing: 0;
+      }
+
+      .brand span,
+      .slide-count,
+      .hint {
+        color: var(--muted);
+        font-size: 13px;
+      }
+
+      .stage {
+        display: grid;
+        min-height: 0;
+        padding: 18px 28px;
+        place-items: center;
+      }
+
+      .slide {
+        background: rgba(21, 24, 29, 0.95);
+        border: 1px solid rgba(255, 255, 255, 0.11);
+        border-radius: 14px;
+        box-shadow: var(--shadow);
+        display: none;
+        grid-template-columns: minmax(0, 1fr);
+        height: min(720px, calc(100vh - 150px));
+        max-width: 1180px;
+        overflow: hidden;
+        position: relative;
+        width: 100%;
+      }
+
+      .slide.is-active {
+        display: grid;
+      }
+
+      .slide-inner {
+        display: grid;
+        gap: 26px;
+        grid-template-columns: 0.9fr 1.1fr;
+        min-height: 0;
+        padding: 48px;
+      }
+
+      .slide.full .slide-inner {
+        grid-template-columns: 1fr;
+      }
+
+      .eyebrow {
+        color: var(--cyan);
+        font-size: 12px;
+        font-weight: 700;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+      }
+
+      h1,
+      h2,
+      h3,
+      p {
+        margin: 0;
+      }
+
+      h1 {
+        font-size: clamp(42px, 6vw, 72px);
+        letter-spacing: 0;
+        line-height: 0.96;
+        max-width: 780px;
+      }
+
+      h2 {
+        font-size: clamp(32px, 4.2vw, 52px);
+        letter-spacing: 0;
+        line-height: 1.02;
+      }
+
+      h3 {
+        font-size: 17px;
+        letter-spacing: 0;
+      }
+
+      .lead {
+        color: var(--muted);
+        font-size: 20px;
+        max-width: 720px;
+      }
+
+      .copy {
+        color: var(--muted);
+        font-size: 16px;
+        max-width: 640px;
+      }
+
+      .stack {
+        align-content: start;
+        display: grid;
+        gap: 18px;
+      }
+
+      .cards {
+        display: grid;
+        gap: 14px;
+      }
+
+      .card {
+        background: var(--panel-2);
+        border: 1px solid var(--line);
+        border-radius: 10px;
+        display: grid;
+        gap: 10px;
+        padding: 18px;
+      }
+
+      .card p,
+      li {
+        color: var(--muted);
+      }
+
+      .number {
+        align-items: center;
+        background: rgba(79, 124, 255, 0.14);
+        border: 1px solid rgba(79, 124, 255, 0.35);
+        border-radius: 8px;
+        color: var(--text);
+        display: inline-flex;
+        font-size: 13px;
+        font-weight: 700;
+        height: 28px;
+        justify-content: center;
+        width: 28px;
+      }
+
+      .flow {
+        display: grid;
+        gap: 12px;
+      }
+
+      .flow-row {
+        align-items: center;
+        background: var(--panel-2);
+        border: 1px solid var(--line);
+        border-radius: 10px;
+        display: grid;
+        gap: 14px;
+        grid-template-columns: auto 1fr;
+        padding: 16px;
+      }
+
+      .terminal,
+      .prompt {
+        background: #090b0e;
+        border: 1px solid #2a313b;
+        border-radius: 10px;
+        color: #d7e0ec;
+        font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+        font-size: 14px;
+        line-height: 1.7;
+        overflow-wrap: anywhere;
+        padding: 18px;
+        white-space: pre-wrap;
+      }
+
+      .prompt {
+        border-color: rgba(71, 213, 217, 0.36);
+      }
+
+      .pill-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+
+      .pill {
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        color: var(--muted);
+        font-size: 13px;
+        padding: 7px 10px;
+      }
+
+      .good {
+        color: var(--green);
+      }
+
+      .warn {
+        color: var(--amber);
+      }
+
+      .bad {
+        color: var(--red);
+      }
+
+      ul {
+        display: grid;
+        gap: 10px;
+        margin: 0;
+        padding-left: 20px;
+      }
+
+      .split-list {
+        display: grid;
+        gap: 14px;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .nav {
+        align-items: center;
+        display: flex;
+        gap: 10px;
+      }
+
+      .nav button {
+        background: var(--panel-2);
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        color: var(--text);
+        cursor: pointer;
+        height: 36px;
+        min-width: 78px;
+        padding: 0 14px;
+      }
+
+      .nav button:hover,
+      .nav button:focus-visible {
+        border-color: var(--blue);
+        outline: none;
+      }
+
+      .progress {
+        background: #232933;
+        border-radius: 999px;
+        height: 6px;
+        overflow: hidden;
+        width: 180px;
+      }
+
+      .progress span {
+        background: linear-gradient(90deg, var(--blue), var(--cyan));
+        display: block;
+        height: 100%;
+        width: 10%;
+      }
+
+      .diagram {
+        align-self: stretch;
+        background:
+          linear-gradient(180deg, rgba(255, 255, 255, 0.05), transparent),
+          var(--panel-2);
+        border: 1px solid var(--line);
+        border-radius: 14px;
+        display: grid;
+        gap: 12px;
+        min-height: 0;
+        padding: 20px;
+      }
+
+      .lane {
+        align-items: center;
+        border: 1px solid rgba(255, 255, 255, 0.09);
+        border-radius: 10px;
+        display: grid;
+        gap: 8px;
+        grid-template-columns: 120px 1fr;
+        padding: 14px;
+      }
+
+      .lane strong {
+        color: var(--text);
+        font-size: 14px;
+      }
+
+      .lane span {
+        color: var(--muted);
+        font-size: 14px;
+      }
+
+      .callout {
+        background: rgba(244, 200, 106, 0.12);
+        border: 1px solid rgba(244, 200, 106, 0.32);
+        border-radius: 10px;
+        color: #f8e4b1;
+        padding: 16px;
+      }
+
+      a {
+        color: var(--cyan);
+      }
+
+      @media (max-width: 900px) {
+        body {
+          overflow: auto;
+        }
+
+        .deck {
+          min-height: 100vh;
+        }
+
+        .slide {
+          height: auto;
+          min-height: calc(100vh - 150px);
+        }
+
+        .slide-inner,
+        .split-list {
+          grid-template-columns: 1fr;
+        }
+
+        .slide-inner {
+          padding: 28px;
+        }
+
+        .topbar,
+        .footer,
+        .stage {
+          padding-left: 16px;
+          padding-right: 16px;
+        }
+
+        .hint {
+          display: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="deck">
+      <header class="topbar">
+        <div class="brand">
+          <span class="mark" aria-hidden="true"></span>
+          <div>
+            <strong>Flytbase Design System</strong>
+            <span>Storybook MCP beginner guide</span>
+          </div>
+        </div>
+        <div class="slide-count" id="slideCount">1 / 10</div>
+      </header>
+
+      <section class="stage" aria-live="polite">
+        <article class="slide is-active full">
+          <div class="slide-inner">
+            <div class="stack">
+              <span class="eyebrow">Start here</span>
+              <h1>Build with the design system, not memory.</h1>
+              <p class="lead">
+                This guide shows how teammates can use the published Storybook and remote MCP so AI agents build product UI from the documented Flytbase design system.
+              </p>
+              <div class="pill-row">
+                <span class="pill">Storybook: visual docs</span>
+                <span class="pill">MCP: agent-readable docs</span>
+                <span class="pill">Chromatic: shared remote access</span>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <article class="slide">
+          <div class="slide-inner">
+            <div class="stack">
+              <span class="eyebrow">01 / What this is</span>
+              <h2>Three things work together.</h2>
+              <p class="copy">
+                Storybook is where humans inspect the component library. MCP is how agents read the same component documentation before writing code.
+              </p>
+            </div>
+            <div class="cards">
+              <div class="card">
+                <h3>Storybook</h3>
+                <p>Open components, examples, props, usage notes, and visual states in the browser.</p>
+              </div>
+              <div class="card">
+                <h3>Chromatic</h3>
+                <p>Hosts the latest published Storybook so teammates do not need to run it locally.</p>
+              </div>
+              <div class="card">
+                <h3>Storybook MCP</h3>
+                <p>Lets agents query documented components and props before they build UI.</p>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <article class="slide">
+          <div class="slide-inner">
+            <div class="stack">
+              <span class="eyebrow">02 / Remote links</span>
+              <h2>The two URLs your team needs.</h2>
+              <p class="copy">
+                One URL is for humans. One URL is for agents. Keep both in the repo README and project onboarding notes.
+              </p>
+            </div>
+            <div class="cards">
+              <div class="card">
+                <h3>Human Storybook URL</h3>
+                <p><a href="https://main--6a370c8694b639efab312a0d.chromatic.com/">https://main--6a370c8694b639efab312a0d.chromatic.com/</a></p>
+              </div>
+              <div class="card">
+                <h3>Agent MCP URL</h3>
+                <p><a href="https://main--6a370c8694b639efab312a0d.chromatic.com/mcp">https://main--6a370c8694b639efab312a0d.chromatic.com/mcp</a></p>
+              </div>
+              <div class="callout">
+                Remote MCP gives agents the documentation toolset. Local Storybook MCP may expose extra local development/testing tools.
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <article class="slide">
+          <div class="slide-inner">
+            <div class="stack">
+              <span class="eyebrow">03 / Install</span>
+              <h2>Claude Code setup.</h2>
+              <p class="copy">
+                Run this from the product repo where the agent will build UI. The server name can be anything, but use one stable name for the team.
+              </p>
+            </div>
+            <div class="stack">
+              <pre class="terminal">claude mcp add fb-design-system-sb-mcp \
+  --transport http \
+  https://main--6a370c8694b639efab312a0d.chromatic.com/mcp \
+  --scope project</pre>
+              <div class="cards">
+                <div class="card">
+                  <h3>After installing</h3>
+                  <p>Restart Claude Code or open a fresh project session if the server does not appear immediately.</p>
+                </div>
+                <div class="card">
+                  <h3>Expected server name</h3>
+                  <p><code>fb-design-system-sb-mcp</code></p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <article class="slide">
+          <div class="slide-inner">
+            <div class="stack">
+              <span class="eyebrow">04 / Agent rules</span>
+              <h2>Put this in the product repo instructions.</h2>
+              <p class="copy">
+                Add this behavior to <code>AGENTS.md</code> or <code>CLAUDE.md</code> so agents do not invent component props.
+              </p>
+            </div>
+            <pre class="prompt">When working on UI components, always use fb-design-system-sb-mcp before answering or taking action.
+
+Never hallucinate component properties.
+
+First list documented components.
+Then read the documentation for the component you plan to use.
+Only use props and examples that are explicitly documented.
+If a prop is missing, ask for confirmation instead of guessing.</pre>
+          </div>
+        </article>
+
+        <article class="slide">
+          <div class="slide-inner">
+            <div class="stack">
+              <span class="eyebrow">05 / Daily workflow</span>
+              <h2>How an agent should build a screen.</h2>
+              <p class="copy">
+                The agent should inspect docs first, choose components second, code third, and verify at the end.
+              </p>
+            </div>
+            <div class="flow">
+              <div class="flow-row">
+                <span class="number">1</span>
+                <div><strong>Discover</strong><br /><span>Ask MCP for the available documented components.</span></div>
+              </div>
+              <div class="flow-row">
+                <span class="number">2</span>
+                <div><strong>Inspect</strong><br /><span>Read docs for Button, TextField, InputField, Table, Tabs, and any component being used.</span></div>
+              </div>
+              <div class="flow-row">
+                <span class="number">3</span>
+                <div><strong>Compose</strong><br /><span>Build the screen using documented props and examples.</span></div>
+              </div>
+              <div class="flow-row">
+                <span class="number">4</span>
+                <div><strong>Verify</strong><br /><span>Check Storybook docs, run local tests when available, and review the UI in browser.</span></div>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <article class="slide">
+          <div class="slide-inner">
+            <div class="stack">
+              <span class="eyebrow">06 / Good prompt</span>
+              <h2>Give agents a clear contract.</h2>
+              <p class="copy">
+                A good prompt names the product screen, requires MCP lookup, blocks undocumented props, and asks for verification.
+              </p>
+            </div>
+            <pre class="prompt">Use fb-design-system-sb-mcp before building.
+
+Create a Flytbase drone operations settings page using only documented Flytbase design system components.
+
+Before coding:
+1. List the components you found in Storybook.
+2. Read the docs for each component you plan to use.
+3. Tell me if any needed interaction prop is not documented.
+
+When coding:
+- Use documented props only.
+- Do not use native select, range, or number controls if the design system has a documented component.
+- Verify the page in the browser before finishing.</pre>
+          </div>
+        </article>
+
+        <article class="slide">
+          <div class="slide-inner">
+            <div class="stack">
+              <span class="eyebrow">07 / What to avoid</span>
+              <h2>Most failures come from guessing.</h2>
+              <p class="copy">
+                These are the patterns that lead to UI that looks close but drifts away from Figma and Storybook.
+              </p>
+            </div>
+            <div class="split-list">
+              <div class="card">
+                <h3 class="bad">Do not</h3>
+                <ul>
+                  <li>Assume props such as <code>shadow</code>, <code>variant</code>, or <code>onChange</code> exist.</li>
+                  <li>Use browser-native dropdowns when <code>InputField</code> exists.</li>
+                  <li>Use browser-native range inputs when <code>Slider</code> exists.</li>
+                  <li>Copy styles from memory instead of using documented components.</li>
+                </ul>
+              </div>
+              <div class="card">
+                <h3 class="good">Do</h3>
+                <ul>
+                  <li>Query Storybook docs first.</li>
+                  <li>Use documented props and examples.</li>
+                  <li>Ask when interaction docs are missing.</li>
+                  <li>Verify in the browser before sharing output.</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <article class="slide">
+          <div class="slide-inner">
+            <div class="stack">
+              <span class="eyebrow">08 / Human review</span>
+              <h2>What you still need to check manually.</h2>
+              <p class="copy">
+                MCP helps agents avoid hallucination. It does not replace design judgment or visual review.
+              </p>
+            </div>
+            <div class="diagram">
+              <div class="lane">
+                <strong>Agent checks</strong>
+                <span>Component list, prop docs, examples, generated code, local render.</span>
+              </div>
+              <div class="lane">
+                <strong>Developer checks</strong>
+                <span>Typecheck, Storybook build, tests, browser smoke, code review.</span>
+              </div>
+              <div class="lane">
+                <strong>Designer checks</strong>
+                <span>Figma parity, spacing, hierarchy, states, interaction quality.</span>
+              </div>
+              <div class="lane">
+                <strong>Product checks</strong>
+                <span>Does the screen solve the workflow clearly for the operator?</span>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <article class="slide">
+          <div class="slide-inner">
+            <div class="stack">
+              <span class="eyebrow">09 / Limits</span>
+              <h2>What remote MCP can and cannot do.</h2>
+              <p class="copy">
+                Set expectations clearly for teammates so they do not think the remote MCP is broken.
+              </p>
+            </div>
+            <div class="split-list">
+              <div class="card">
+                <h3 class="good">Remote MCP can</h3>
+                <ul>
+                  <li>Expose published Storybook documentation.</li>
+                  <li>Help agents find components and documented props.</li>
+                  <li>Reduce design-system hallucinations.</li>
+                </ul>
+              </div>
+              <div class="card">
+                <h3 class="warn">Remote MCP cannot</h3>
+                <ul>
+                  <li>Run local story tests in your repo.</li>
+                  <li>Guarantee Figma pixel parity by itself.</li>
+                  <li>Know undocumented product-specific behavior.</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <article class="slide">
+          <div class="slide-inner">
+            <div class="stack">
+              <span class="eyebrow">10 / Ready checklist</span>
+              <h2>Before sharing agent-built UI.</h2>
+              <p class="copy">
+                Use this checklist before a teammate treats the result as design-system compliant.
+              </p>
+            </div>
+            <div class="cards">
+              <div class="card">
+                <h3>Agent evidence</h3>
+                <p>The agent says which Storybook components and docs it used.</p>
+              </div>
+              <div class="card">
+                <h3>No undocumented props</h3>
+                <p>Every design-system prop in code is documented or shown in a story example.</p>
+              </div>
+              <div class="card">
+                <h3>No native replacements</h3>
+                <p>Dropdowns, sliders, toggles, tabs, tables, and form controls use the design system.</p>
+              </div>
+              <div class="card">
+                <h3>Human review complete</h3>
+                <p>Designer or owner checks visual parity and product workflow quality.</p>
+              </div>
+            </div>
+          </div>
+        </article>
+      </section>
+
+      <footer class="footer">
+        <div class="hint">Use left/right arrow keys, Space, or the buttons.</div>
+        <div class="nav">
+          <button type="button" id="prev">Back</button>
+          <div class="progress" aria-hidden="true"><span id="progress"></span></div>
+          <button type="button" id="next">Next</button>
+        </div>
+      </footer>
+    </main>
+
+    <script>
+      const slides = Array.from(document.querySelectorAll(".slide"));
+      const count = document.getElementById("slideCount");
+      const progress = document.getElementById("progress");
+      const prev = document.getElementById("prev");
+      const next = document.getElementById("next");
+      let index = 0;
+
+      function render() {
+        slides.forEach((slide, slideIndex) => {
+          slide.classList.toggle("is-active", slideIndex === index);
+        });
+        count.textContent = `${index + 1} / ${slides.length}`;
+        progress.style.width = `${((index + 1) / slides.length) * 100}%`;
+        prev.disabled = index === 0;
+        next.disabled = index === slides.length - 1;
+      }
+
+      function go(delta) {
+        index = Math.max(0, Math.min(slides.length - 1, index + delta));
+        render();
+      }
+
+      prev.addEventListener("click", () => go(-1));
+      next.addEventListener("click", () => go(1));
+      window.addEventListener("keydown", (event) => {
+        if (event.key === "ArrowRight" || event.key === " ") go(1);
+        if (event.key === "ArrowLeft") go(-1);
+      });
+
+      render();
+    </script>
+  </body>
+</html>

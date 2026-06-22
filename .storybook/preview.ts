@@ -1,8 +1,6 @@
 import type { Preview } from '@storybook/react';
 import { createElement } from 'react';
-import '../tokens/primitive.css';
-import '../tokens/semantic-light.css';
-import '../tokens/semantic-dark.css';
+import '../src/style.css';
 import '../src/styles/storybook.css';
 
 const preview: Preview = {

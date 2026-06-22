@@ -1,4 +1,3 @@
-import '../styles.css';
 import { RadioButton } from '../RadioButton';
 import { Button } from '../Button';
 import { cx, useControllableState } from '../shared';

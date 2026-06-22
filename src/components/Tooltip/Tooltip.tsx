@@ -1,5 +1,4 @@
 import type { ReactNode } from 'react';
-import '../styles.css';
 import { Button } from '../Button';
 import { cx } from '../shared';
 

@@ -1,5 +1,4 @@
 import type { InputHTMLAttributes } from 'react';
-import '../styles.css';
 import { cx, type ControlState, useControllableState } from '../shared';
 
 /**

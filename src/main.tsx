@@ -1,6 +1,6 @@
 import React, { useMemo, useState } from 'react';
 import ReactDOM from 'react-dom/client';
-import '../tokens/index.css';
+import './style.css';
 import './styles/storybook.css';
 import {
   Badge,

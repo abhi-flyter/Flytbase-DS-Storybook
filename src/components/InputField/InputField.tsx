@@ -1,5 +1,4 @@
 import type { ButtonHTMLAttributes, KeyboardEvent } from 'react';
-import '../styles.css';
 import { Icon, icons } from '../icons';
 import { cx, useControllableState } from '../shared';
 

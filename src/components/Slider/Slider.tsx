@@ -1,5 +1,4 @@
 import { useState, type HTMLAttributes, type KeyboardEvent, type PointerEvent } from 'react';
-import '../styles.css';
 import { cx, useControllableState } from '../shared';
 
 export type SliderValue = number | [number, number];

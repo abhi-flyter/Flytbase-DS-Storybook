@@ -1,5 +1,4 @@
 import type { ButtonHTMLAttributes } from 'react';
-import '../styles.css';
 import { cx, type ControlState, useControllableState } from '../shared';
 
 /**

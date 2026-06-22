@@ -1,5 +1,4 @@
 import type { ReactNode } from 'react';
-import '../styles.css';
 import { Checkbox, type CheckboxSelection } from '../Checkbox';
 import { cx, useControllableState } from '../shared';
 
