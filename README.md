@@ -71,6 +71,12 @@ Import the stylesheet once in your app root:
 import '@flytbase/design-system/style.css';
 ```
 
+If a product only needs the CSS variables, import the token file:
+
+```tsx
+import '@flytbase/design-system/tokens.css';
+```
+
 Use documented components in product code:
 
 ```tsx
@@ -96,13 +102,47 @@ claude mcp add fb-design-system-sb-mcp --transport http https://main--6a370c8694
 
 The package gives the project real React components. The MCP gives agents the Storybook documentation they must read before using those components.
 
+## Token Usage Rules
+
+Use the documented FDS token namespace exactly:
+
+```css
+body {
+  background: var(--color-fds-background-bg);
+  color: var(--color-fds-text-icon-01);
+}
+
+.panel {
+  background: var(--color-fds-background-level-2);
+  border: 1px solid var(--color-fds-outline-o-primary);
+}
+```
+
+Do not invent aliases like:
+
+```css
+/* Invalid: these variables are not exported by the package. */
+--fds-color-surface
+--fds-color-text-primary
+--fds-color-border
+--fds-color-primary
+```
+
+For product UI, prefer:
+
+- `--color-fds-*` for colors
+- `--spacing-fds-*` for spacing and radius
+- `--typography-*` for type
+
 ## Agent Rules
 
 Agents should follow `AGENTS.md` or `CLAUDE.md`:
 
 - Query Storybook MCP before choosing components or props.
 - Never invent component props.
+- Never invent token names or icon keys.
 - Use `list-all-documentation`, then `get-documentation`.
+- Query `get-documentation` for `foundations-tokens` before writing page-level CSS.
 - Use only documented props or examples from stories.
 - Ask before using undocumented APIs.
 
@@ -112,6 +152,7 @@ Agents should follow `AGENTS.md` or `CLAUDE.md`:
 npm run build
 npm run typecheck
 npm run build-storybook
+npm run verify:tokens
 npm run verify:phase4
 npm run verify:phase5
 npm run verify:phase5:live

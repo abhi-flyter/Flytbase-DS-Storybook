@@ -1,4 +1,5 @@
 import { existsSync, readFileSync } from 'node:fs';
+import { spawnSync } from 'node:child_process';
 import path from 'node:path';
 
 const expectedMcpName = 'fb-design-system-sb-mcp';
@@ -75,6 +76,12 @@ if (!packageJson.devDependencies?.playwright) {
 if (packageJson.scripts?.['test-storybook'] !== 'vitest --project=storybook') {
   throw new Error('Missing package script: "test-storybook": "vitest --project=storybook".');
 }
+if (packageJson.scripts?.['verify:tokens'] !== 'node scripts/verify-token-contract.mjs') {
+  throw new Error('Missing package script: "verify:tokens": "node scripts/verify-token-contract.mjs".');
+}
+if (packageJson.exports?.['./tokens.css'] !== './tokens/index.css') {
+  throw new Error('Missing package export: "./tokens.css": "./tokens/index.css".');
+}
 
 assertIncludes(storybookMain, "'@storybook/addon-mcp'", 'Storybook config');
 assertIncludes(storybookMain, "'@storybook/addon-vitest'", 'Storybook config');
@@ -105,6 +112,10 @@ for (const [label, source] of [
   assertIncludes(source, 'get-storybook-story-instructions', label);
   assertIncludes(source, 'run-story-tests', label);
   assertIncludes(source, 'Never hallucinate component properties', label);
+  assertIncludes(source, 'foundations-tokens', label);
+  assertIncludes(source, '--color-fds-background-bg', label);
+  assertIncludes(source, '--fds-color-surface', label);
+  assertIncludes(source, 'Never invent token aliases', label);
 }
 
 const missingComponents = requiredComponents
@@ -126,6 +137,8 @@ const report = {
   agentInstructionFiles: ['AGENTS.md', 'CLAUDE.md'],
   mcpConfig: '.mcp.json',
   readinessDoc: 'docs/phase-5/storybook-mcp-readiness.md',
+  tokenContractScript: packageJson.scripts['verify:tokens'],
+  tokenCssExport: packageJson.exports['./tokens.css'],
   storybookTestScript: packageJson.scripts['test-storybook']
 };
 
@@ -133,4 +146,14 @@ console.log(JSON.stringify(report, null, 2));
 
 if (missingComponents.length > 0 || componentsWithoutDocs.length > 0) {
   process.exit(1);
+}
+
+const tokenContract = spawnSync(process.execPath, ['scripts/verify-token-contract.mjs'], {
+  stdio: 'inherit',
+  shell: false
+});
+
+if (tokenContract.status !== 0) {
+  console.error('\nPhase 5 token contract verification failed.');
+  process.exit(tokenContract.status ?? 1);
 }

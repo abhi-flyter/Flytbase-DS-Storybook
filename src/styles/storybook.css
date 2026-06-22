@@ -66,6 +66,83 @@ select {
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
 }
 
+.foundation-contract,
+.foundation-token-warning {
+  background: var(--color-fds-background-level-2);
+  border: 1px solid var(--color-fds-outline-o-primary);
+  border-radius: var(--spacing-fds-size-150);
+  display: grid;
+  gap: var(--spacing-fds-size-200);
+  max-width: 920px;
+  padding: var(--spacing-fds-size-400);
+}
+
+.foundation-contract p,
+.foundation-token-warning p,
+.foundation-token-row p {
+  color: var(--color-fds-text-icon-02);
+  font-size: var(--typography-font-size-14);
+  line-height: var(--typography-line-height-normal);
+  margin: 0;
+}
+
+.foundation-contract code,
+.foundation-token-warning code,
+.foundation-token-row code {
+  color: var(--color-fds-text-icon-01);
+}
+
+.foundation-eyebrow {
+  color: var(--color-fds-primary-50) !important;
+  font-size: var(--typography-font-size-12) !important;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.foundation-token-usage {
+  display: grid;
+  gap: var(--spacing-fds-size-300);
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+}
+
+.foundation-token-row {
+  align-items: start;
+  background: var(--color-fds-background-level-2);
+  border: 1px solid var(--color-fds-outline-o-primary);
+  border-radius: var(--spacing-fds-size-150);
+  display: grid;
+  gap: var(--spacing-fds-size-300);
+  grid-template-columns: 44px minmax(0, 1fr);
+  min-height: 112px;
+  padding: var(--spacing-fds-size-300);
+}
+
+.foundation-token-row div {
+  display: grid;
+  gap: var(--spacing-fds-size-100);
+}
+
+.foundation-token-row strong {
+  color: var(--color-fds-text-icon-01);
+}
+
+.foundation-token-swatch {
+  border: 1px solid var(--color-fds-outline-o-secondary);
+  border-radius: var(--spacing-fds-size-100);
+  height: 44px;
+  width: 44px;
+}
+
+.foundation-token-warning {
+  border-color: var(--color-fds-critical-system-warning-w-30p);
+}
+
+.foundation-token-warning div {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-fds-size-200);
+}
+
 .foundation-token-card,
 .foundation-scale-row,
 .foundation-type-row {

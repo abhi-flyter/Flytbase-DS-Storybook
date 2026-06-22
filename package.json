@@ -21,7 +21,8 @@
       "import": "./dist/flytbase-design-system.js",
       "require": "./dist/flytbase-design-system.umd.cjs"
     },
-    "./style.css": "./src/style.css"
+    "./style.css": "./src/style.css",
+    "./tokens.css": "./tokens/index.css"
   },
   "sideEffects": [
     "*.css"
@@ -39,6 +40,7 @@
     "build-storybook": "storybook build",
     "typecheck": "tsc --noEmit",
     "audit:phase4": "node scripts/audit-phase-4.mjs",
+    "verify:tokens": "node scripts/verify-token-contract.mjs",
     "verify:storybook-static": "node scripts/verify-storybook-static.mjs",
     "verify:phase4": "node scripts/verify-phase-4.mjs",
     "verify:phase5": "node scripts/verify-phase-5.mjs",

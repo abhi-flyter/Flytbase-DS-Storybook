@@ -7,6 +7,11 @@ When working on UI components, always use the `fb-design-system-sb-mcp` MCP tool
 - Query `get-documentation` for a specific component to see its available properties and examples.
 - Query `get-documentation-for-story` when the component documentation does not provide enough story-level detail.
 - Only use properties that are explicitly documented or shown in example stories.
+- For design tokens, query `get-documentation` for `foundations-tokens` before writing page-level CSS, layout backgrounds, text colors, borders, spacing, radius, or typography.
+- Use token names exactly as documented. Prefer the FDS namespace for product UI: `--color-fds-*` for colors, `--spacing-fds-*` for spacing/radius, and `--typography-*` for type.
+- **CRITICAL: Never invent token aliases.** Do not use guessed names like `--fds-color-surface`, `--fds-color-text-primary`, `--fds-color-border`, or `--fds-color-primary`; those variables are not exported by this package.
+- For app/page backgrounds use `--color-fds-background-bg`; for primary text/icons use `--color-fds-text-icon-01`; for secondary text/icons use `--color-fds-text-icon-02`; for primary borders use `--color-fds-outline-o-primary`; for neutral interactive surfaces use `--color-fds-surface-states-surface`; for primary actions use `--color-fds-primary-200-p`.
+- For icons, use only icons exported by the package documentation/source. Do not invent icon keys such as `icons.menu` or `icons.bell` unless they are explicitly exported.
 - For interactive product screens, prefer the documented interaction APIs shown in Storybook usage stories, such as `value`/`onChange`, `selection`/`onSelectionChange`, `selected`/`onSelectedChange`, `values`/`onChange`, `order`/`onOrderChange`, and `selectedRowIds`/`onRowSelectionChange`.
 - If a property is not documented, do not assume properties based on naming conventions or patterns from other design systems. Check back with the user instead.
 - Use the `get-storybook-story-instructions` tool to fetch the latest instructions for creating or updating stories.
