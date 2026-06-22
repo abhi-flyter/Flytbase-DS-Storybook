@@ -27,6 +27,39 @@ Local MCP endpoint:
 http://localhost:6006/mcp
 ```
 
+## Figma Token Sync
+
+This repo treats `F Design System 2.0 Copy` as the v1 Figma source:
+
+```text
+WRXdNp9M1SEjWPaUhU67pg
+```
+
+Create a local `.env.local` file:
+
+```env
+FIGMA_FILE_KEY=WRXdNp9M1SEjWPaUhU67pg
+FIGMA_FILE_NAME="F Design System 2.0 Copy"
+FIGMA_ACCESS_TOKEN=your_figma_token_here
+```
+
+Then run:
+
+```bash
+npm run tokens:check
+npm run tokens:sync
+```
+
+`tokens:check` verifies committed token files match Figma. `tokens:sync` updates `tokens/*.css` and `tokens/tokens.manifest.json` from Figma.
+
+For GitHub Actions, add one repository secret:
+
+```text
+FIGMA_ACCESS_TOKEN
+```
+
+GitHub path: repo `Settings` -> `Secrets and variables` -> `Actions` -> `New repository secret`.
+
 ## Agent MCP Setup
 
 Use this MCP server name:

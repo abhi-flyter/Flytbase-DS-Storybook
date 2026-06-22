@@ -35,6 +35,8 @@
     "build": "npm run build:lib",
     "build:lib": "vite build && tsc -p tsconfig.lib.json",
     "prepare": "npm run build:lib",
+    "tokens:sync": "node scripts/export-tokens-from-figma.mjs",
+    "tokens:check": "node scripts/check-token-drift.mjs",
     "storybook": "storybook dev --port 6006 --host 0.0.0.0",
     "build-storybook": "storybook build",
     "typecheck": "tsc --noEmit",
