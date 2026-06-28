@@ -1,6 +1,6 @@
-import type { ReactNode } from 'react';
+import { useId, type KeyboardEvent, type ReactNode } from 'react';
 import { Button } from '../Button';
-import { cx } from '../shared';
+import { cx, useControllableState } from '../shared';
 
 export type TooltipType = 'plain' | 'rich';
 export type TooltipPlacement =
@@ -26,6 +26,12 @@ export interface TooltipProps {
   children: ReactNode;
   /** Tooltip body content. */
   content: ReactNode;
+  /** Controlled open state for product use. */
+  open?: boolean;
+  /** Initial open state for uncontrolled product use. */
+  defaultOpen?: boolean;
+  /** Called when hover, focus, or Escape changes open state. */
+  onOpenChange?: (open: boolean) => void;
   /** Tooltip type from the Figma `Type` axis. */
   type?: TooltipType;
   /** Heading shown in rich tooltip mode. */
@@ -46,25 +52,56 @@ export function Tooltip({
   children,
   className,
   content,
+  defaultOpen = false,
   onAction,
+  onOpenChange,
+  open,
   placement = 'top',
   title,
   type = 'plain'
 }: TooltipProps) {
+  const tooltipId = useId();
   const isRich = type === 'rich';
+  const [isOpen, setIsOpen] = useControllableState<boolean>({
+    defaultValue: defaultOpen,
+    onChange: onOpenChange,
+    value: open
+  });
+
+  function handleKeyDown(event: KeyboardEvent<HTMLSpanElement>) {
+    if (event.key === 'Escape') {
+      event.preventDefault();
+      setIsOpen(false);
+    }
+  }
+
   return (
-    <span className={cx('fds-tooltip', className)} data-placement={placement} data-type={type}>
+    <span
+      aria-describedby={isOpen ? tooltipId : undefined}
+      className={cx('fds-tooltip', className)}
+      data-open={isOpen ? 'yes' : 'no'}
+      data-placement={placement}
+      data-type={type}
+      onBlur={() => setIsOpen(false)}
+      onFocus={() => setIsOpen(true)}
+      onKeyDown={handleKeyDown}
+      onMouseEnter={() => setIsOpen(true)}
+      onMouseLeave={() => setIsOpen(false)}
+      tabIndex={0}
+    >
       {children}
-      <span className="fds-tooltip-content" role="tooltip">
-        <span className="fds-tooltip-arrow" aria-hidden="true" />
-        {isRich && title ? <strong>{title}</strong> : null}
-        <span>{content}</span>
-        {isRich && actionLabel ? (
-          <Button onClick={onAction} size="small" variant="link">
-            {actionLabel}
-          </Button>
-        ) : null}
-      </span>
+      {isOpen ? (
+        <span className="fds-tooltip-content" id={tooltipId} role="tooltip">
+          <span className="fds-tooltip-arrow" aria-hidden="true" />
+          {isRich && title ? <strong>{title}</strong> : null}
+          <span>{content}</span>
+          {isRich && actionLabel ? (
+            <Button onClick={onAction} size="small" variant="link">
+              {actionLabel}
+            </Button>
+          ) : null}
+        </span>
+      ) : null}
     </span>
   );
 }

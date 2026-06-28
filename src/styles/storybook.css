@@ -579,3 +579,146 @@ select {
     flex-direction: column;
   }
 }
+
+.foundation-contracts {
+  display: grid;
+  gap: var(--spacing-fds-size-600);
+}
+
+.foundation-contracts > .foundation-doc-header p:not(.foundation-eyebrow) {
+  color: var(--color-fds-text-icon-02);
+  font-size: var(--typography-font-size-14);
+  line-height: var(--typography-line-height-normal);
+  margin: 0;
+  max-width: 980px;
+}
+
+.foundation-contract-summary,
+.foundation-contract-grid {
+  display: grid;
+  gap: var(--spacing-fds-size-300);
+}
+
+.foundation-contract-summary {
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+}
+
+.foundation-contract-summary article,
+.foundation-contract-card {
+  background: var(--color-fds-background-level-2);
+  border: 1px solid var(--color-fds-outline-o-primary);
+  border-radius: var(--spacing-fds-size-150);
+}
+
+.foundation-contract-summary article {
+  display: grid;
+  gap: var(--spacing-fds-size-100);
+  padding: var(--spacing-fds-size-300);
+}
+
+.foundation-contract-summary strong {
+  font-size: var(--typography-font-size-20);
+  line-height: var(--typography-line-height-loose);
+}
+
+.foundation-contract-summary span,
+.foundation-contract-card p,
+.foundation-contract-card li,
+.foundation-contract-card dd,
+.foundation-contract-pills span {
+  color: var(--color-fds-text-icon-02);
+  font-size: var(--typography-font-size-14);
+  line-height: var(--typography-line-height-normal);
+}
+
+.foundation-contract-grid {
+  grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+}
+
+.foundation-contract-card {
+  display: grid;
+  gap: var(--spacing-fds-size-400);
+  min-width: 0;
+  padding: var(--spacing-fds-size-400);
+}
+
+.foundation-contract-card[data-readiness="presentational-only"] {
+  border-color: var(--color-fds-critical-system-error-e-40);
+}
+
+.foundation-contract-card[data-readiness="partial"] {
+  border-color: var(--color-fds-critical-system-warning-w-30p);
+}
+
+.foundation-contract-card header {
+  align-items: start;
+  display: flex;
+  gap: var(--spacing-fds-size-300);
+  justify-content: space-between;
+}
+
+.foundation-contract-card h2,
+.foundation-contract-card h3,
+.foundation-contract-card p,
+.foundation-contract-card dl,
+.foundation-contract-card dd,
+.foundation-contract-card ul {
+  margin: 0;
+}
+
+.foundation-contract-card h2 {
+  font-size: var(--typography-font-size-18);
+  line-height: var(--typography-line-height-relaxed);
+}
+
+.foundation-contract-card h3,
+.foundation-contract-card dt {
+  color: var(--color-fds-text-icon-01);
+  font-size: var(--typography-font-size-14);
+  line-height: var(--typography-line-height-normal);
+}
+
+.foundation-contract-card header > span {
+  background: var(--color-fds-surface-states-surface);
+  border: 1px solid var(--color-fds-outline-o-secondary);
+  border-radius: var(--spacing-fds-full);
+  color: var(--color-fds-text-icon-01);
+  flex: none;
+  font-size: var(--typography-font-size-12);
+  line-height: var(--typography-line-height-tight);
+  padding: var(--spacing-fds-size-100) var(--spacing-fds-size-200);
+}
+
+.foundation-contract-card dl {
+  display: grid;
+  gap: var(--spacing-fds-size-200);
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+}
+
+.foundation-contract-card section {
+  display: grid;
+  gap: var(--spacing-fds-size-200);
+}
+
+.foundation-contract-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-fds-size-200);
+}
+
+.foundation-contract-pills code,
+.foundation-contract-card dd code,
+.foundation-contract-card p code {
+  background: var(--color-fds-background-level-1);
+  border: 1px solid var(--color-fds-outline-o-secondary);
+  border-radius: var(--spacing-fds-size-100);
+  color: var(--color-fds-text-icon-01);
+  overflow-wrap: anywhere;
+  padding: var(--spacing-fds-size-50) var(--spacing-fds-size-100);
+}
+
+.foundation-contract-card ul {
+  display: grid;
+  gap: var(--spacing-fds-size-100);
+  padding-left: var(--spacing-fds-size-400);
+}

@@ -25,9 +25,11 @@ Phase 5 connects the F Design System Storybook to AI agents through Storybook MC
 - `npm run verify:phase5` checks the Phase 5 file/config/static-manifest gates.
 - `npm run verify:tokens` checks the token naming contract, forbidden alias examples, README guidance, and package token CSS export.
 - `npm run verify:icons` checks the Figma-exported SVG icon contract, generated React icon components, marker component coverage, Storybook icon stories, and removal of third-party icon runtime dependencies.
+- `npm run verify:component-contracts` checks the Figma-to-React component contract registry, required Storybook usage stories, preview-only prop boundaries, app-owned lifecycle boundaries, and presentational-only safeguards.
+- `npm run verify:figma-storybook-parity` generates `docs/phase-5/figma-storybook-parity-report.md` and checks Figma source-node mappings, Figma axes, React prop mappings, Storybook prop metadata, usage stories, token/icon evidence, and interaction-test evidence.
 - `npm run verify:phase5:live` checks MCP initialization, tool discovery, documentation lookup, and component prop retrieval.
 - With `STORYBOOK_MCP_URL=http://127.0.0.1:6208/mcp`, `npm run verify:phase5:live` also verifies the running Storybook MCP development/testing toolset and runs a focused story test through `run-story-tests`.
-- `npm run test-storybook` passes locally with 32 test files and 65 tests.
+- `npm run test-storybook` passes locally with 35 test files and 97 tests.
 
 ## Agent Registration
 
@@ -94,6 +96,7 @@ Agents must:
 - Query `get-documentation` before using a component prop.
 - Query `get-documentation` for `foundations-tokens` before writing page-level CSS or choosing token names.
 - Query `get-documentation-for-story` when story-level evidence is needed.
+- Check `Foundations/Component Contracts` when deciding whether a component is production-ready, presentational-only, app-owned lifecycle, or missing a required product behavior.
 - Use FDS token names exactly as documented: `--color-fds-*` for colors, `--spacing-fds-*` for spacing/radius, and `--typography-*` for type.
 - Use `--color-fds-background-bg` for app/page backgrounds, `--color-fds-text-icon-01` for primary text/icons, `--color-fds-text-icon-02` for secondary text/icons, `--color-fds-outline-o-primary` for primary borders, `--color-fds-surface-states-surface` for neutral interactive surfaces, and `--color-fds-primary-200-p` for primary actions.
 - Never invent token aliases such as `--fds-color-surface`, `--fds-color-text-primary`, `--fds-color-border`, or `--fds-color-primary`.
@@ -119,6 +122,8 @@ The agent should call `list-all-documentation` through `fb-design-system-sb-mcp`
 npm run verify:phase5
 npm run verify:tokens
 npm run verify:icons
+npm run verify:component-contracts
+npm run verify:figma-storybook-parity
 npm run verify:foundations
 npm run verify:phase5:live
 STORYBOOK_MCP_URL=http://127.0.0.1:6208/mcp npm run verify:phase5:live

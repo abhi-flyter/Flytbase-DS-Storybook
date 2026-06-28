@@ -29,3 +29,4 @@ export * from './Toast';
 export * from './ToggleButton';
 export * from './ToggleSwitch';
 export * from './Tooltip';
+export * from './contracts';
