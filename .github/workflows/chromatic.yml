@@ -35,8 +35,17 @@ jobs:
       - name: Build Storybook
         run: npm run build-storybook
 
+      - name: Run Storybook interaction tests
+        run: npm run test-storybook
+
       - name: Verify static Storybook manifest
         run: npm run verify:storybook-static
+
+      - name: Verify Phase 5 Storybook MCP readiness
+        run: npm run verify:phase5
+
+      - name: Verify Phase 6 builder-safe MCP contract
+        run: npm run verify:phase6
 
       - name: Require Chromatic token
         run: test -n "$CHROMATIC_PROJECT_TOKEN"

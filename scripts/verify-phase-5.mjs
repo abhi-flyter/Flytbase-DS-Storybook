@@ -82,6 +82,12 @@ if (packageJson.scripts?.['verify:tokens'] !== 'node scripts/verify-token-contra
 if (packageJson.scripts?.['verify:icons'] !== 'node scripts/verify-icons.mjs') {
   throw new Error('Missing package script: "verify:icons": "node scripts/verify-icons.mjs".');
 }
+if (packageJson.scripts?.['verify:component-contracts'] !== 'node scripts/verify-component-contracts.mjs') {
+  throw new Error('Missing package script: "verify:component-contracts": "node scripts/verify-component-contracts.mjs".');
+}
+if (packageJson.scripts?.['verify:figma-storybook-parity'] !== 'node scripts/verify-figma-storybook-parity.mjs') {
+  throw new Error('Missing package script: "verify:figma-storybook-parity": "node scripts/verify-figma-storybook-parity.mjs".');
+}
 if (packageJson.exports?.['./tokens.css'] !== './tokens/index.css') {
   throw new Error('Missing package export: "./tokens.css": "./tokens/index.css".');
 }
@@ -141,6 +147,9 @@ const report = {
   mcpConfig: '.mcp.json',
   readinessDoc: 'docs/phase-5/storybook-mcp-readiness.md',
   tokenContractScript: packageJson.scripts['verify:tokens'],
+  componentContractScript: packageJson.scripts['verify:component-contracts'],
+  parityReportScript: packageJson.scripts['verify:figma-storybook-parity'],
+  parityReport: 'docs/phase-5/figma-storybook-parity-report.md',
   tokenCssExport: packageJson.exports['./tokens.css'],
   storybookTestScript: packageJson.scripts['test-storybook']
 };
@@ -169,4 +178,24 @@ const iconContract = spawnSync(process.execPath, ['scripts/verify-icons.mjs'], {
 if (iconContract.status !== 0) {
   console.error('\nPhase 5 icon contract verification failed.');
   process.exit(iconContract.status ?? 1);
+}
+
+const componentContract = spawnSync(process.execPath, ['scripts/verify-component-contracts.mjs'], {
+  stdio: 'inherit',
+  shell: false
+});
+
+if (componentContract.status !== 0) {
+  console.error('\nPhase 5 component contract verification failed.');
+  process.exit(componentContract.status ?? 1);
+}
+
+const figmaStorybookParity = spawnSync(process.execPath, ['scripts/verify-figma-storybook-parity.mjs'], {
+  stdio: 'inherit',
+  shell: false
+});
+
+if (figmaStorybookParity.status !== 0) {
+  console.error('\nPhase 5 Figma-to-Storybook parity verification failed.');
+  process.exit(figmaStorybookParity.status ?? 1);
 }

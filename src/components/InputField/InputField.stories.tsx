@@ -31,11 +31,39 @@ const meta: Meta<typeof InputField> = {
 export default meta;
 type Story = StoryObj<typeof InputField>;
 
+async function expectText(root: Element, text: string) {
+  for (let attempt = 0; attempt < 10; attempt += 1) {
+    if (root.textContent?.includes(text)) return;
+    await new Promise((resolve) => setTimeout(resolve, 20));
+  }
+  throw new Error(`Expected rendered text: ${text}`);
+}
+
+async function expectAttribute(element: Element, name: string, value: string) {
+  for (let attempt = 0; attempt < 10; attempt += 1) {
+    if (element.getAttribute(name) === value) return;
+    await new Promise((resolve) => setTimeout(resolve, 20));
+  }
+  throw new Error(`Expected ${name}="${value}", received "${element.getAttribute(name) ?? 'null'}"`);
+}
+
+function getButton(root: Element, label: string) {
+  const button = Array.from(root.querySelectorAll<HTMLButtonElement>('button')).find((candidate) => candidate.getAttribute('aria-label') === label);
+  if (!button) throw new Error(`Expected button ${label}`);
+  return button;
+}
+
+async function pressKey(target: HTMLElement, key: string) {
+  target.dispatchEvent(new KeyboardEvent('keydown', { key, bubbles: true }));
+  await new Promise((resolve) => setTimeout(resolve, 20));
+}
+
 export const Playground: Story = {};
 
 export const Usage: Story = {
   render: () => {
     const [drone, setDrone] = useState('Drone A');
+    const [open, setOpen] = useState(false);
     const [sites, setSites] = useState<string[]>(['Drone A', 'Drone B']);
     return (
       <VariantSection title="Input Field Usage">
@@ -44,9 +72,13 @@ export const Usage: Story = {
             active
             label="Drone"
             onChange={(value) => setDrone(String(value))}
+            onOpenChange={setOpen}
+            open={open}
             options={['Drone A', 'Drone B', 'Drone C']}
             value={drone}
           />
+          <span>Selected drone: {drone}</span>
+          <span>Menu state: {open ? 'open' : 'closed'}</span>
           <InputField
             active
             label="Allowed drones"
@@ -58,6 +90,24 @@ export const Usage: Story = {
         </VariantGroup>
       </VariantSection>
     );
+  },
+  play: async ({ canvasElement }) => {
+    const droneButton = getButton(canvasElement, 'Drone');
+
+    await expectAttribute(droneButton, 'aria-expanded', 'false');
+    droneButton.click();
+    await expectAttribute(droneButton, 'aria-expanded', 'true');
+    await expectText(canvasElement, 'Menu state: open');
+
+    await pressKey(droneButton, 'ArrowDown');
+    await pressKey(droneButton, 'ArrowDown');
+    await pressKey(droneButton, 'Enter');
+    await expectText(canvasElement, 'Selected drone: Drone C');
+    await expectAttribute(droneButton, 'aria-expanded', 'false');
+
+    droneButton.click();
+    await pressKey(droneButton, 'Escape');
+    await expectText(canvasElement, 'Menu state: closed');
   }
 };
 

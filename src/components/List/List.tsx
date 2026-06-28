@@ -1,5 +1,5 @@
 import type { ReactNode } from 'react';
-import { cx, type ControlState } from '../shared';
+import { cx, type ControlState, useControllableState } from '../shared';
 
 /**
  * List row from Figma `List`.
@@ -19,8 +19,16 @@ export interface ListProps {
   size?: 'default' | 'small';
   /** Whether the row renders its expanded body. */
   expanded?: boolean;
-  /** Called when the clickable row is activated for expand/collapse behavior. */
+  /** Initial expanded state for uncontrolled product use. */
+  defaultExpanded?: boolean;
+  /** Called when the row changes expanded state. */
+  onExpandedChange?: (expanded: boolean) => void;
+  /**
+   * Deprecated compatibility callback. Prefer onExpandedChange for product use.
+   */
   onToggle?: () => void;
+  /** Prevents row activation. */
+  disabled?: boolean;
   /** Expanded content slot. */
   children?: ReactNode;
   /** Preview-only state for Figma row states. */
@@ -33,32 +41,66 @@ export interface ListProps {
 export function List({
   children,
   className,
+  defaultExpanded = false,
   description,
-  expanded = false,
+  disabled = false,
+  expanded,
   label,
+  onExpandedChange,
   onToggle,
   prefix,
   size = 'default',
   suffix,
   visualState = 'default'
 }: ListProps) {
-  const RowElement = onToggle ? 'button' : 'div';
+  const [currentExpanded, setCurrentExpanded] = useControllableState({
+    defaultValue: defaultExpanded,
+    onChange: onExpandedChange,
+    value: expanded
+  });
+  const isDisabled = disabled || visualState === 'disabled';
+  const isInteractive = Boolean(children || onToggle || onExpandedChange);
+
+  function handleToggle() {
+    if (isDisabled) return;
+    if (children) {
+      setCurrentExpanded(!currentExpanded);
+    }
+    onToggle?.();
+  }
+
+  const rowContent = (
+    <>
+      {prefix ? <span className="fds-list-prefix">{prefix}</span> : null}
+      <span className="fds-list-content">
+        <span>{label}</span>
+        {description ? <small>{description}</small> : null}
+      </span>
+      {suffix ? <span className="fds-list-suffix">{suffix}</span> : null}
+    </>
+  );
+
   return (
-    <article className={cx('fds-list', className)} data-expanded={expanded ? 'yes' : 'no'} data-size={size} data-state={visualState}>
-      <RowElement
-        aria-expanded={children ? expanded : undefined}
-        className="fds-list-row"
-        onClick={onToggle}
-        type={onToggle ? 'button' : undefined}
-      >
-        {prefix ? <span className="fds-list-prefix">{prefix}</span> : null}
-        <span className="fds-list-content">
-          <span>{label}</span>
-          {description ? <small>{description}</small> : null}
-        </span>
-        {suffix ? <span className="fds-list-suffix">{suffix}</span> : null}
-      </RowElement>
-      {expanded && children ? <div className="fds-list-expanded">{children}</div> : null}
+    <article
+      className={cx('fds-list', className)}
+      data-expanded={currentExpanded ? 'yes' : 'no'}
+      data-size={size}
+      data-state={isDisabled ? 'disabled' : visualState}
+    >
+      {isInteractive ? (
+        <button
+          aria-expanded={children ? currentExpanded : undefined}
+          className="fds-list-row"
+          disabled={isDisabled}
+          onClick={handleToggle}
+          type="button"
+        >
+          {rowContent}
+        </button>
+      ) : (
+        <div className="fds-list-row">{rowContent}</div>
+      )}
+      {currentExpanded && children ? <div className="fds-list-expanded">{children}</div> : null}
     </article>
   );
 }
